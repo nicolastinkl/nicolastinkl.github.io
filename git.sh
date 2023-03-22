@@ -4,7 +4,7 @@ hexo clean
 hexo g
 cd ..
 
-cp -rf zeus-blog/public/* ./test/
+cp -rf zeus-blog/public/* ./
 
 git add .
 
