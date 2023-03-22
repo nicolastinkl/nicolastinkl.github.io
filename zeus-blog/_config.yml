@@ -16,8 +16,8 @@ navbar:
   
  
 
-# deploy:
-#   type: git
-#   repo: https://github.com/nicolastinkl/nicolastinkl.github.io.git  
-#   branch: [branch]
-#   token: [token]
+deploy:
+  type: git
+  repo: https://github.com/nicolastinkl/nicolastinkl.github.io.git  
+  branch: [main]
+  token: [token]
