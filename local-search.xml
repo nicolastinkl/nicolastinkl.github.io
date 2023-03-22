@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>独角兽支付平台-微信扫码支付配置教程</title>
+    <link href="/2023/03/22/howtosettingswechatpay/"/>
+    <url>/2023/03/22/howtosettingswechatpay/</url>
+    
+    <content type="html"><![CDATA[<h2 id="前提是要申请好个体工商户认证-小程序认证（可以淘宝认证）"><a href="#前提是要申请好个体工商户认证-小程序认证（可以淘宝认证）" class="headerlink" title="前提是要申请好个体工商户认证 + 小程序认证（可以淘宝认证）"></a>前提是要申请好个体工商户认证 + 小程序认证（可以淘宝认证）</h2><h1 id="第一步：配置好网站后进入微信后台：https-pay-weixin-qq-com"><a href="#第一步：配置好网站后进入微信后台：https-pay-weixin-qq-com" class="headerlink" title="第一步：配置好网站后进入微信后台：https://pay.weixin.qq.com/"></a>第一步：配置好网站后进入微信后台：<a href="https://pay.weixin.qq.com/">https://pay.weixin.qq.com/</a></h1><p>申请V2 密钥，记得保存好。</p><p><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-36-57.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-42-38.png"></p><h1 id="第二步：-认证-关联小程序"><a href="#第二步：-认证-关联小程序" class="headerlink" title="第二步： 认证+关联小程序"></a>第二步： 认证+关联小程序</h1><p><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-43-09.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-35-56.png"></p><p>保存小程序Appid</p><h1 id="第三步：-关联好小程序微信个体户开通JSAPI-x2F-Native支付："><a href="#第三步：-关联好小程序微信个体户开通JSAPI-x2F-Native支付：" class="headerlink" title="第三步： 关联好小程序微信个体户开通JSAPI&#x2F;Native支付："></a>第三步： 关联好小程序微信个体户开通JSAPI&#x2F;Native支付：</h1><p><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-36-23.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-36-32.png"></p><h1 id="第四步：设置独角兽支付配置"><a href="#第四步：设置独角兽支付配置" class="headerlink" title="第四步：设置独角兽支付配置"></a>第四步：设置独角兽支付配置</h1><p><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-55-42.png"></p><h1 id="第五步：-支付测试"><a href="#第五步：-支付测试" class="headerlink" title="第五步： 支付测试"></a>第五步： 支付测试</h1><p><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-56-27.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-57-04.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-57-11.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-57-50.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-58-49.png"><br><img src="/2023/03/22/howtosettingswechatpay/Snipaste_2023-03-22_18-58-13.png"> </p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>myblog2</title>
     <link href="/2023/03/22/myblog2/"/>
     <url>/2023/03/22/myblog2/</url>
