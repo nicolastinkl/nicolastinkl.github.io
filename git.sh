@@ -1,4 +1,8 @@
 #!/bin/bash
+cd zeus-blog
+hexo clean
+hexo g
+cd ..
 
 git add .
 date +%F > timefile
