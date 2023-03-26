@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="swift for operator自定义操作符： 123func +* (left: Vector2D, right: Vector2D) -&gt; Double &amp;#123;    return left.x * right.x + left.y * right.y&amp;#125; 但是编译器会给我们一个错误: Operator implementation without matching o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift_for_operator">
+<meta property="og:url" content="http://example.com/2023/03/22/swift_for_operator/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="swift for operator自定义操作符： 123func +* (left: Vector2D, right: Vector2D) -&gt; Double &amp;#123;    return left.x * right.x + left.y * right.y&amp;#125; 但是编译器会给我们一个错误: Operator implementation without matching o">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.808Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>swift_for_operator - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="swift_for_operator"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">swift_for_operator</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="swift-for-operator"><a href="#swift-for-operator" class="headerlink" title="swift for operator"></a>swift for operator</h1><p>自定义操作符：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq">func +* (<span class="hljs-built_in">left</span>: Vector2D, <span class="hljs-built_in">right</span>: Vector2D) -&gt; Double &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">left</span>.x * <span class="hljs-built_in">right</span>.x + <span class="hljs-built_in">left</span>.y * <span class="hljs-built_in">right</span>.y<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>但是编译器会给我们一个错误:</p>
+<pre><code class="hljs">Operator implementation without matching operator declaration
+</code></pre>
+<p>这是<code>因为我们没有对这个操作符进行声明</code>。之前可以直接重载像 +,-,* 这样的操作 符,是因为 Swift 中已经有定义了,如果我们要新加操作符的话,需要先对其进行声明, 告诉编译器这个符号其实是一个操作符。添加如下代码:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">infix</span> operator +* &#123;<br>    <span class="hljs-attribute">associativity</span> <span class="hljs-literal">none</span><br>    precedence <span class="hljs-number">160</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>###infix<br>  表示要定义的是一个中位操作符,即前后都是输入;其他的修饰子还包括 prefix 和 postfix,不再赘述</p>
+</li>
+<li><p>###associativity<br>  定义了结合律,即如果多个同类的操作符顺序出现的计算顺序。比如常见的加法 和减法都是 left,就是说多个加法同时出现时按照从左往右的顺序计算 (因为加 法满足交换律,所以这个顺序无所谓,但是减法的话计算顺序就很重要了)。点乘 的结果是一个 Double,不再会和其他点乘结合使用,所以这里写成 none;</p>
+</li>
+<li><p>###precedence<br>  运算的优先级,越高的话越优先进行运算。Swift 中乘法和除法的优先级是 150, 加法和减法是 140,这里我们定义点积优先级 160,就是说应该早于普通的乘除进 行运算。<br>有了这些之后,我们就可以很简单地进行向量的点积运算了:<br>let result &#x3D; v1 +* v2</p>
+</li>
+</ul>
+<blockquote>
+<p>最后需要多提一点的是,Swift 的操作符是不能定义在局部域中的,因为至少会希望在 能在全局范围使用你的操作符,否则操作符也就失去意义了。另外,来自不同 module 的操作符是有可能冲突的,这对于库开发者来说是需要特别注意的地方。如果库中的 操作符冲突的话,使用者是无法像解决类型名冲突那样通过指定库名字来进行调用的。 因此在重载或者自定义操作符时,应当尽量将其作为其他某个方法的 “简便写法”,而 避免在其中实现大量逻辑或者提供独一无二的功能。这样即使出现了冲突,使用者也 还可以用方法调用的方式使用你的库。运算符的命名也应当尽量明了,避免歧义和可 能的误解。因为一个不被公认的操作符是存在冲突风险和理解难度的,所以我们不应 该滥用这个特性。在使用重载或者自定义操作符时,请先再三权衡斟酌,你或者你的 用户是否真的需要这个的操作符。</p>
+</blockquote>
+<h2 id="操作符之自定义正则表达式："><a href="#操作符之自定义正则表达式：" class="headerlink" title="操作符之自定义正则表达式："></a>操作符之自定义正则表达式：</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs swift"><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">RegexHelper</span> &#123;<br><span class="hljs-keyword">let</span> regex: <span class="hljs-type">NSRegularExpression</span><br>    <span class="hljs-keyword">init</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">pattern</span>: <span class="hljs-type">String</span>) &#123;<br>        <span class="hljs-keyword">var</span> error: <span class="hljs-type">NSError</span>?<br>        regex <span class="hljs-operator">=</span> <span class="hljs-type">NSRegularExpression</span>(pattern: pattern,<br>                                    options: .<span class="hljs-type">CaseInsensitive</span>,<br>                                      error: <span class="hljs-operator">&amp;</span>error)<br>&#125;<br>    <span class="hljs-keyword">func</span> <span class="hljs-title function_">match</span>(<span class="hljs-params">input</span>: <span class="hljs-type">String</span>) -&gt; <span class="hljs-type">Bool</span> &#123;<br>        <span class="hljs-keyword">let</span> matches <span class="hljs-operator">=</span> regex.matchesInString(input,<br>                        options: <span class="hljs-literal">nil</span>,<br>                        range: <span class="hljs-type">NSMakeRange</span>(<span class="hljs-number">0</span>, countElements(input)))<br><span class="hljs-keyword">return</span> matches.count <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span> &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> mailPattern <span class="hljs-operator">=</span> <span class="hljs-string">&quot;^([a-z0-9_<span class="hljs-subst">\\</span>.-]+)@([<span class="hljs-subst">\\</span>da-z<span class="hljs-subst">\\</span>.-]+)<span class="hljs-subst">\\</span>.([a-z<span class="hljs-subst">\\</span>.]&#123;2,6&#125;)$&quot;</span><br><span class="hljs-keyword">let</span> matcher <span class="hljs-operator">=</span> <span class="hljs-type">RegexHelper</span>(mailPattern)<br><span class="hljs-keyword">let</span> maybeMailAddress <span class="hljs-operator">=</span> <span class="hljs-string">&quot;onev@onevcat.com&quot;</span><br><span class="hljs-keyword">if</span> matcher.match(maybeMailAddress) &#123; println(<span class="hljs-string">&quot;有效的邮箱地址&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p><code>自定义：</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">infix</span> <span class="hljs-keyword">operator</span> <span class="hljs-title">=~</span> &#123;<br>    associativity none<br>    precedence <span class="hljs-number">130</span><br>&#125;<br><span class="hljs-keyword">func</span> <span class="hljs-title function_">=~</span>(<span class="hljs-params">lhs</span>: <span class="hljs-type">String</span>, <span class="hljs-params">rhs</span>: <span class="hljs-type">String</span>) -&gt; <span class="hljs-type">Bool</span> &#123; <span class="hljs-keyword">return</span><br>    <span class="hljs-type">RegexHelper</span>(rhs).match(lhs)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p><code>用法:</code></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lsl"><br>if <span class="hljs-string">&quot;onev@onevcat.com&quot;</span> =~ <span class="hljs-string">&quot;^([a-z0-9_<span class="hljs-subst">\\</span>.-]+)@([<span class="hljs-subst">\\</span>da-z<span class="hljs-subst">\\</span>.-]+)<span class="hljs-subst">\\</span>.([a-z<span class="hljs-subst">\\</span>.]&#123;2,6&#125;)$&quot;</span> &#123; println(<span class="hljs-string">&quot;有效的邮箱地址&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">prefix</span> <span class="hljs-keyword">operator</span> <span class="hljs-title">~/</span> &#123;&#125;<br><span class="hljs-keyword">prefix</span> <span class="hljs-keyword">func</span> <span class="hljs-title function_">~/</span>(<span class="hljs-params">pattern</span>: <span class="hljs-type">String</span>) -&gt; <span class="hljs-type">NSRegularExpression</span> &#123;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-type">NSRegularExpression</span>(pattern: pattern, options: <span class="hljs-literal">nil</span>,error: <span class="hljs-literal">nil</span>)<br><br>&#125;<br><br>我们在 <span class="hljs-keyword">case</span> 语句里使用正则表达式的话,就可以去匹配被 <span class="hljs-keyword">switch</span> 的字符串了:<br><span class="hljs-keyword">let</span> contact <span class="hljs-operator">=</span> (<span class="hljs-string">&quot;http://onevcat.com&quot;</span>, <span class="hljs-string">&quot;onev@onevcat.com&quot;</span>)<br><span class="hljs-keyword">let</span> mailRegex <span class="hljs-operator">=</span><br><span class="hljs-operator">~/</span><span class="hljs-string">&quot;^([a-z0-9_<span class="hljs-subst">\\</span>.-]+)@([<span class="hljs-subst">\\</span>da-z<span class="hljs-subst">\\</span>.-]+)<span class="hljs-subst">\\</span>.([a-z<span class="hljs-subst">\\</span>.]&#123;2,6&#125;)$&quot;</span><br><br><span class="hljs-keyword">let</span> siteRegex <span class="hljs-operator">=</span> <span class="hljs-operator">~/</span><span class="hljs-string">&quot;^(https?:<span class="hljs-subst">\\</span>/<span class="hljs-subst">\\</span>/)?([<span class="hljs-subst">\\</span>da-z<span class="hljs-subst">\\</span>.-]+)<span class="hljs-subst">\\</span>.([a-z<span class="hljs-subst">\\</span>.]&#123;2,6&#125;)([<span class="hljs-subst">\\</span>/<span class="hljs-subst">\\</span>w <span class="hljs-subst">\\</span>.-]*)*<span class="hljs-subst">\\</span>/?$&quot;</span><br><span class="hljs-keyword">switch</span> contact &#123;<br>    <span class="hljs-keyword">case</span> (siteRegex, mailRegex):<br>        println(<span class="hljs-string">&quot;同时拥有有效的网站和邮箱&quot;</span>)<br>    <span class="hljs-keyword">case</span> (<span class="hljs-keyword">_</span>, mailRegex):<br>        println(<span class="hljs-string">&quot;只拥有有效的邮箱&quot;</span>)<br>    <span class="hljs-keyword">case</span> (siteRegex, <span class="hljs-keyword">_</span>):<br>        println(<span class="hljs-string">&quot;只拥有有效的网站&quot;</span>)<br>    <span class="hljs-keyword">default</span>: println(<span class="hljs-string">&quot;嘛都没有&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>swift_for_operator</div>
+      <div>http://example.com/2023/03/22/swift_for_operator/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/swift_closure_expressionblocks/" title="swift_closure_expressionblocks">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">swift_closure_expressionblocks</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/swift_private_spec__to_github/" title="swift_private_spec__to_github">
+                        <span class="hidden-mobile">swift_private_spec__to_github</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

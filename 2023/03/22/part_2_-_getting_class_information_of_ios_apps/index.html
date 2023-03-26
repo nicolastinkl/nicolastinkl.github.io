@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="所有英文文档对应的中文地址: http:&#x2F;&#x2F;wufawei.com&#x2F;2013&#x2F;11&#x2F;ios-application-security-1 http:&#x2F;&#x2F;wufawei.com&#x2F;2013&#x2F;11&#x2F;ios-application-security-.. http:&#x2F;&#x2F;wufawei.com&#x2F;2013&#x2F;11&#x2F;ios-application-security-38  Part 2 - Getting cla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="part_2_-_getting_class_information_of_ios_apps">
+<meta property="og:url" content="http://example.com/2023/03/22/part_2_-_getting_class_information_of_ios_apps/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="所有英文文档对应的中文地址: http:&#x2F;&#x2F;wufawei.com&#x2F;2013&#x2F;11&#x2F;ios-application-security-1 http:&#x2F;&#x2F;wufawei.com&#x2F;2013&#x2F;11&#x2F;ios-application-security-.. http:&#x2F;&#x2F;wufawei.com&#x2F;2013&#x2F;11&#x2F;ios-application-security-38  Part 2 - Getting cla">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.730Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>part_2_-_getting_class_information_of_ios_apps - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="part_2_-_getting_class_information_of_ios_apps"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">part_2_-_getting_class_information_of_ios_apps</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="所有英文文档对应的中文地址"><a href="#所有英文文档对应的中文地址" class="headerlink" title="所有英文文档对应的中文地址:"></a><u>所有英文文档对应的中文地址</u>:</h1><ul>
+<li><a target="_blank" rel="noopener" href="http://wufawei.com/2013/11/ios-application-security-1/">http://wufawei.com/2013/11/ios-application-security-1</a></li>
+<li><a target="_blank" rel="noopener" href="http://wufawei.com/2013/11/ios-application-security-.../">http://wufawei.com/2013/11/ios-application-security-..</a></li>
+<li><a target="_blank" rel="noopener" href="http://wufawei.com/2013/11/ios-application-security-38/">http://wufawei.com/2013/11/ios-application-security-38</a></li>
+</ul>
+<h2 id="Part-2-Getting-class-information-of-iOS-apps"><a href="#Part-2-Getting-class-information-of-iOS-apps" class="headerlink" title="Part 2 - Getting class information of iOS apps"></a>Part 2 - Getting class information of iOS apps</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/06/16/ios-application-security-part-2-getting-class-information-of-ios-apps/">http://highaltitudehacks.com/2013/06/16/ios-application-security-part-2-getting-class-information-of-ios-apps/</a></p>
+<h2 id="Part-3-Understanding-the-Objective-C-Runtime"><a href="#Part-3-Understanding-the-Objective-C-Runtime" class="headerlink" title="Part 3 - Understanding the Objective-C Runtime"></a>Part 3 - Understanding the Objective-C Runtime</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/06/16/ios-application-security-part-3-understanding-the-objective-c-runtime">http://highaltitudehacks.com/2013/06/16/ios-application-security-part-3-understanding-the-objective-c-runtime</a></p>
+<h2 id="Part-4-–-Runtime-Analysis-Using-Cycript-Yahoo-Weather-App"><a href="#Part-4-–-Runtime-Analysis-Using-Cycript-Yahoo-Weather-App" class="headerlink" title="Part 4 – Runtime Analysis Using Cycript (Yahoo Weather App)"></a>Part 4 – Runtime Analysis Using Cycript (Yahoo Weather App)</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/07/02/ios-aios-appllication-security-part-4-runtime-analysis-using-cycript-yahoo-weather-app">http://highaltitudehacks.com/2013/07/02/ios-aios-appllication-security-part-4-runtime-analysis-using-cycript-yahoo-weather-app</a></p>
+<h2 id="Part-5-–-Advanced-Runtime-analysis-and-manipulation-using-Cycript-Yahoo-Weather-App"><a href="#Part-5-–-Advanced-Runtime-analysis-and-manipulation-using-Cycript-Yahoo-Weather-App" class="headerlink" title="Part 5 – Advanced Runtime analysis and manipulation using Cycript (Yahoo Weather App)"></a>Part 5 – Advanced Runtime analysis and manipulation using Cycript (Yahoo Weather App)</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/07/02/ios-application-security-part-5-advanced-runtime-analysis-and-manipulation-using-cycript-yahoo-weather-app">http://highaltitudehacks.com/2013/07/02/ios-application-security-part-5-advanced-runtime-analysis-and-manipulation-using-cycript-yahoo-weather-app</a></p>
+<h2 id="Part-6-New-Security-Features-in-iOS-7"><a href="#Part-6-New-Security-Features-in-iOS-7" class="headerlink" title="Part 6 - New Security Features in iOS 7"></a>Part 6 - New Security Features in iOS 7</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/07/25/ios-application-security-part-6-new-security-features-in-ios-7">http://highaltitudehacks.com/2013/07/25/ios-application-security-part-6-new-security-features-in-ios-7</a></p>
+<h2 id="Part-8-Method-Swizzling-using-Cycript"><a href="#Part-8-Method-Swizzling-using-Cycript" class="headerlink" title="Part 8 - Method Swizzling using Cycript"></a>Part 8 - Method Swizzling using Cycript</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/07/25/ios-application-security-part-8-method-swizzling-using-cycript">http://highaltitudehacks.com/2013/07/25/ios-application-security-part-8-method-swizzling-using-cycript</a></p>
+<h2 id="Part-9-–-Analyzing-Security-of-iOS-Applications-using-Snoop-it"><a href="#Part-9-–-Analyzing-Security-of-iOS-Applications-using-Snoop-it" class="headerlink" title="Part 9 – Analyzing Security of iOS Applications using Snoop-it"></a>Part 9 – Analyzing Security of iOS Applications using Snoop-it</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/08/20/ios-application-security-part-9-analyzing-security-of-ios-applications-using-snoop-it">http://highaltitudehacks.com/2013/08/20/ios-application-security-part-9-analyzing-security-of-ios-applications-using-snoop-it</a></p>
+<h2 id="Part-10-–-iOS-Filesystem-and-Forensics"><a href="#Part-10-–-iOS-Filesystem-and-Forensics" class="headerlink" title="Part 10 – iOS Filesystem and Forensics"></a>Part 10 – iOS Filesystem and Forensics</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/08/20/ios-application-security-part-10-ios-filesystem-and-forensics">http://highaltitudehacks.com/2013/08/20/ios-application-security-part-10-ios-filesystem-and-forensics</a></p>
+<h2 id="Part-11-–-Analyzing-Network-Traffic-over-HTTP-x2F-HTTPS"><a href="#Part-11-–-Analyzing-Network-Traffic-over-HTTP-x2F-HTTPS" class="headerlink" title="Part 11 – Analyzing Network Traffic over HTTP&#x2F;HTTPS"></a>Part 11 – Analyzing Network Traffic over HTTP&#x2F;HTTPS</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/08/20/ios-application-security-part-11-analyzing-network-traffic-over-http-slash-https">http://highaltitudehacks.com/2013/08/20/ios-application-security-part-11-analyzing-network-traffic-over-http-slash-https</a></p>
+<h2 id="Part-12-–-Dumping-Keychain-Data"><a href="#Part-12-–-Dumping-Keychain-Data" class="headerlink" title="Part 12 – Dumping Keychain Data"></a>Part 12 – Dumping Keychain Data</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/08/20/ios-application-security-part-12-dumping-keychain-data">http://highaltitudehacks.com/2013/08/20/ios-application-security-part-12-dumping-keychain-data</a></p>
+<h2 id="Part-13-–-Booting-a-custom-Ramdisk-using-Sogeti-Data-Protection-tools"><a href="#Part-13-–-Booting-a-custom-Ramdisk-using-Sogeti-Data-Protection-tools" class="headerlink" title="Part 13 – Booting a custom Ramdisk using Sogeti Data Protection tools"></a>Part 13 – Booting a custom Ramdisk using Sogeti Data Protection tools</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/09/17/ios-application-security-part-13-booting-a-custom-ramdisk-using-sogeti-data-protection-tools">http://highaltitudehacks.com/2013/09/17/ios-application-security-part-13-booting-a-custom-ramdisk-using-sogeti-data-protection-tools</a></p>
+<h2 id="Part-14-–-Gathering-information-using-Sogeti-Data-Protection-tools"><a href="#Part-14-–-Gathering-information-using-Sogeti-Data-Protection-tools" class="headerlink" title="Part 14 – Gathering information using Sogeti Data Protection tools"></a>Part 14 – Gathering information using Sogeti Data Protection tools</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/09/17/ios-application-security-part-14-gathering-information-using-sogeti-data-protection-tools">http://highaltitudehacks.com/2013/09/17/ios-application-security-part-14-gathering-information-using-sogeti-data-protection-tools</a></p>
+<h2 id="Part-15-–-Static-Analysis-of-iOS-Applications-using-iNalyzer"><a href="#Part-15-–-Static-Analysis-of-iOS-Applications-using-iNalyzer" class="headerlink" title="Part 15 – Static Analysis of iOS Applications using iNalyzer"></a>Part 15 – Static Analysis of iOS Applications using iNalyzer</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/09/17/ios-application-security-part-15-static-analysis-of-ios-applications-using-inalyzer">http://highaltitudehacks.com/2013/09/17/ios-application-security-part-15-static-analysis-of-ios-applications-using-inalyzer</a></p>
+<h2 id="Part-16-–-Runtime-Analysis-of-iOS-Applications-using-iNalyzer"><a href="#Part-16-–-Runtime-Analysis-of-iOS-Applications-using-iNalyzer" class="headerlink" title="Part 16 – Runtime Analysis of iOS Applications using iNalyzer"></a>Part 16 – Runtime Analysis of iOS Applications using iNalyzer</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/09/17/ios-application-security-part-16-runtime-analysis-of-ios-applications-using-inalyzer">http://highaltitudehacks.com/2013/09/17/ios-application-security-part-16-runtime-analysis-of-ios-applications-using-inalyzer</a></p>
+<h2 id="Part-17-–-Black-Box-Assessment-of-iOS-Applications-using-INTROSPY"><a href="#Part-17-–-Black-Box-Assessment-of-iOS-Applications-using-INTROSPY" class="headerlink" title="Part 17 – Black-Box Assessment of iOS Applications using INTROSPY"></a>Part 17 – Black-Box Assessment of iOS Applications using INTROSPY</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/09/23/ios-application-security-part-17-black-box-assessment-of-ios-applications-using-introspy">http://highaltitudehacks.com/2013/09/23/ios-application-security-part-17-black-box-assessment-of-ios-applications-using-introspy</a></p>
+<h2 id="Part-18-–-Detecting-custom-signatures-with-Introspy"><a href="#Part-18-–-Detecting-custom-signatures-with-Introspy" class="headerlink" title="Part 18 – Detecting custom signatures with Introspy"></a>Part 18 – Detecting custom signatures with Introspy</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/09/26/ios-application-security-part-18-detecting-custom-signatures-with-introspy">http://highaltitudehacks.com/2013/09/26/ios-application-security-part-18-detecting-custom-signatures-with-introspy</a></p>
+<h2 id="Part-19-–-Programmatical-Usage-of-Introspy"><a href="#Part-19-–-Programmatical-Usage-of-Introspy" class="headerlink" title="Part 19 – Programmatical Usage of Introspy"></a>Part 19 – Programmatical Usage of Introspy</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/10/26/ios-application-security-part-19-programmatical-usage-of-introspy">http://highaltitudehacks.com/2013/10/26/ios-application-security-part-19-programmatical-usage-of-introspy</a></p>
+<h2 id="Part-20-–-Local-Data-Storage-NSUserDefaults"><a href="#Part-20-–-Local-Data-Storage-NSUserDefaults" class="headerlink" title="Part 20 – Local Data Storage (NSUserDefaults"></a>Part 20 – Local Data Storage (NSUserDefaults</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/10/26/ios-application-security-part-20-local-data-storage-nsuserdefaults">http://highaltitudehacks.com/2013/10/26/ios-application-security-part-20-local-data-storage-nsuserdefaults</a></p>
+<h2 id="Part-21-–-ARM-and-GDB-Basics"><a href="#Part-21-–-ARM-and-GDB-Basics" class="headerlink" title="Part 21 – ARM and GDB Basics"></a>Part 21 – ARM and GDB Basics</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/11/08/ios-application-security-part-21-arm-and-gdb-basics">http://highaltitudehacks.com/2013/11/08/ios-application-security-part-21-arm-and-gdb-basics</a></p>
+<h2 id="Part-22-–-Runtime-Analysis-and-Manipulation-using-GDB"><a href="#Part-22-–-Runtime-Analysis-and-Manipulation-using-GDB" class="headerlink" title="Part 22 – Runtime Analysis and Manipulation using GDB"></a>Part 22 – Runtime Analysis and Manipulation using GDB</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/12/17/ios-application-security-part-22-runtime-analysis-and-manipulation-using-gdb">http://highaltitudehacks.com/2013/12/17/ios-application-security-part-22-runtime-analysis-and-manipulation-using-gdb</a></p>
+<h2 id="Part-23-–-Defending-against-runtime-analysis-and-manipulation"><a href="#Part-23-–-Defending-against-runtime-analysis-and-manipulation" class="headerlink" title="Part 23 – Defending against runtime analysis and manipulation"></a>Part 23 – Defending against runtime analysis and manipulation</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/12/17/ios-application-security-part-23-defending-against-runtime-analysis-and-manipulation">http://highaltitudehacks.com/2013/12/17/ios-application-security-part-23-defending-against-runtime-analysis-and-manipulation</a></p>
+<h2 id="Part-25-–-Secure-Coding-Practices-for-iOS-Development"><a href="#Part-25-–-Secure-Coding-Practices-for-iOS-Development" class="headerlink" title="Part 25 – Secure Coding Practices for iOS Development"></a>Part 25 – Secure Coding Practices for iOS Development</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/12/17/ios-application-security-part-25-secure-coding-practices-for-ios-development">http://highaltitudehacks.com/2013/12/17/ios-application-security-part-25-secure-coding-practices-for-ios-development</a></p>
+<h2 id="Part-26-–-Patching-iOS-Applications-using-IDA-Pro-and-Hex-Fiend"><a href="#Part-26-–-Patching-iOS-Applications-using-IDA-Pro-and-Hex-Fiend" class="headerlink" title="Part 26 – Patching iOS Applications using IDA Pro and Hex Fiend"></a>Part 26 – Patching iOS Applications using IDA Pro and Hex Fiend</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2013/12/17/ios-application-security-part-26-patching-ios-applications-using-ida-pro-and-hex-fiend">http://highaltitudehacks.com/2013/12/17/ios-application-security-part-26-patching-ios-applications-using-ida-pro-and-hex-fiend</a></p>
+<h2 id="Part-27-Setting-up-a-mobile-pentesting-environment-with-iOS-7-Jailbreak"><a href="#Part-27-Setting-up-a-mobile-pentesting-environment-with-iOS-7-Jailbreak" class="headerlink" title="Part 27 - Setting up a mobile pentesting environment with iOS 7 Jailbreak"></a>Part 27 - Setting up a mobile pentesting environment with iOS 7 Jailbreak</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/01/17/ios-application-security-part-27-setting-up-a-mobile-pentesting-environment-with-ios-7-jailbreak">http://highaltitudehacks.com/2014/01/17/ios-application-security-part-27-setting-up-a-mobile-pentesting-environment-with-ios-7-jailbreak</a></p>
+<h2 id="Part-28-Patching-iOS-Application-with-Hopper"><a href="#Part-28-Patching-iOS-Application-with-Hopper" class="headerlink" title="Part 28 - Patching iOS Application with Hopper"></a>Part 28 - Patching iOS Application with Hopper</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/01/17/ios-application-security-part-28-patching-ios-application-with-hopper">http://highaltitudehacks.com/2014/01/17/ios-application-security-part-28-patching-ios-application-with-hopper</a></p>
+<h2 id="Part-29-Insecure-or-Broken-Cryptography"><a href="#Part-29-Insecure-or-Broken-Cryptography" class="headerlink" title="Part 29 - Insecure or Broken Cryptography"></a>Part 29 - Insecure or Broken Cryptography</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/01/17/ios-application-security-part-29-insecure-or-broken-cryptography">http://highaltitudehacks.com/2014/01/17/ios-application-security-part-29-insecure-or-broken-cryptography</a></p>
+<h2 id="Part-30-Attacking-URL-schemes"><a href="#Part-30-Attacking-URL-schemes" class="headerlink" title="Part 30 - Attacking URL schemes"></a>Part 30 - Attacking URL schemes</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/03/07/ios-application-security-part-30-attacking-url-schemes">http://highaltitudehacks.com/2014/03/07/ios-application-security-part-30-attacking-url-schemes</a></p>
+<h2 id="Part-31-The-problem-with-using-third-party-libraries-for-securing-your-apps"><a href="#Part-31-The-problem-with-using-third-party-libraries-for-securing-your-apps" class="headerlink" title="Part 31 - The problem with using third party libraries for securing your apps"></a>Part 31 - The problem with using third party libraries for securing your apps</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/03/18/ios-application-security-part-31-the-problem-with-using-third-party-libraries-for-securing-your-apps">http://highaltitudehacks.com/2014/03/18/ios-application-security-part-31-the-problem-with-using-third-party-libraries-for-securing-your-apps</a></p>
+<h2 id="Part-32-Automating-tasks-with-iOS-Reverse-Engineering-Toolkit-iRET"><a href="#Part-32-Automating-tasks-with-iOS-Reverse-Engineering-Toolkit-iRET" class="headerlink" title="Part 32 - Automating tasks with iOS Reverse Engineering Toolkit (iRET)"></a>Part 32 - Automating tasks with iOS Reverse Engineering Toolkit (iRET)</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/03/25/ios-application-security-part-32-automating-tasks-with-ios-reverse-engineering-toolkit-iret">http://highaltitudehacks.com/2014/03/25/ios-application-security-part-32-automating-tasks-with-ios-reverse-engineering-toolkit-iret</a></p>
+<h2 id="Part-34-Tracing-Method-calls-using-Logify"><a href="#Part-34-Tracing-Method-calls-using-Logify" class="headerlink" title="Part 34 - Tracing Method calls using Logify"></a>Part 34 - Tracing Method calls using Logify</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/04/18/ios-application-security-part-34-tracing-method-calls-using-logify">http://highaltitudehacks.com/2014/04/18/ios-application-security-part-34-tracing-method-calls-using-logify</a></p>
+<h2 id="Part-35-–-Auditing-iOS-Applications-With-iDB"><a href="#Part-35-–-Auditing-iOS-Applications-With-iDB" class="headerlink" title="Part 35 – Auditing iOS Applications With iDB"></a>Part 35 – Auditing iOS Applications With iDB</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/10/18/ios-application-security-part-35-auditing-ios-applications-with-idb">http://highaltitudehacks.com/2014/10/18/ios-application-security-part-35-auditing-ios-applications-with-idb</a></p>
+<h2 id="Part-36-–-Bypassing-certificate-pinning-using-SSL-Kill-switch"><a href="#Part-36-–-Bypassing-certificate-pinning-using-SSL-Kill-switch" class="headerlink" title="Part 36 – Bypassing certificate pinning using SSL Kill switch"></a>Part 36 – Bypassing certificate pinning using SSL Kill switch</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/11/03/ios-application-security-part-36-bypassing-certificate-pinning-using-ssl-kill-switch">http://highaltitudehacks.com/2014/11/03/ios-application-security-part-36-bypassing-certificate-pinning-using-ssl-kill-switch</a></p>
+<h2 id="Part-37-Adapting-to-iOS-8"><a href="#Part-37-Adapting-to-iOS-8" class="headerlink" title="Part 37 - Adapting to iOS 8"></a>Part 37 - Adapting to iOS 8</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2014/12/21/ios-application-security-part-37-adapting-to-ios-8">http://highaltitudehacks.com/2014/12/21/ios-application-security-part-37-adapting-to-ios-8</a></p>
+<h2 id="Part-38-Attacking-apps-using-Parse-Guest-Lecture-by-Egor-Tolstoy"><a href="#Part-38-Attacking-apps-using-Parse-Guest-Lecture-by-Egor-Tolstoy" class="headerlink" title="Part 38 - Attacking apps using Parse (Guest Lecture by Egor Tolstoy)"></a>Part 38 - Attacking apps using Parse (Guest Lecture by Egor Tolstoy)</h2><p><a target="_blank" rel="noopener" href="http://highaltitudehacks.com/2015/01/24/ios-application-security-part-38-attacking-apps-using-parse">http://highaltitudehacks.com/2015/01/24/ios-application-security-part-38-attacking-apps-using-parse</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>part_2_-_getting_class_information_of_ios_apps</div>
+      <div>http://example.com/2023/03/22/part_2_-_getting_class_information_of_ios_apps/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/part_21_-_arm_and_gdb_basics/" title="part_21_-_arm_and_gdb_basics">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">part_21_-_arm_and_gdb_basics</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/perfect_match/" title="perfect_match">
+                        <span class="hidden-mobile">perfect_match</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

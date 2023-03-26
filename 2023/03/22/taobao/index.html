@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="taobao 客户端架构前言：WindVane 衔接 Android&#x2F;iOS 的导航交互及动画  URL总线（对接Native UI总线）  JS Bridge：JS &lt;-&gt; Native（+ 性能及安全性增强）  缓存 &amp; 预缓存（兼容Cache-Control + AppCache）  数据采集、本地&#x2F;网络性能监控  安全加固、审核、隔离，人机识别  增">
+<meta property="og:type" content="article">
+<meta property="og:title" content="taobao">
+<meta property="og:url" content="http://example.com/2023/03/22/taobao/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="taobao 客户端架构前言：WindVane 衔接 Android&#x2F;iOS 的导航交互及动画  URL总线（对接Native UI总线）  JS Bridge：JS &lt;-&gt; Native（+ 性能及安全性增强）  缓存 &amp; 预缓存（兼容Cache-Control + AppCache）  数据采集、本地&#x2F;网络性能监控  安全加固、审核、隔离，人机识别  增">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://lijuren.qiniudn.com/product/lijuren/img/51.pic.jpg?attname=&e=1413431634&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:pjDcfQw3DZ2F7turae_nygDElvQ">
+<meta property="og:image" content="http://lijuren.qiniudn.com/product/lijuren/img/3.pic.jpg?attname=&e=1413432218&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:-mv4Gg_75iOBvdPG30lezXoKw2o">
+<meta property="og:image" content="http://lijuren.qiniudn.com/product/lijuren/img/4.pic_hd.jpg?attname=&e=1413434787&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:doCsWB69uJuPiC_Y07wq5cTsutw">
+<meta property="og:image" content="http://lijuren.qiniudn.com/product/lijuren/img/6.pic_hd.jpg?attname=&e=1413434962&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:7wDX44tvwe9DxGOsqGhCNkHEfZQ">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.823Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://lijuren.qiniudn.com/product/lijuren/img/51.pic.jpg?attname=&e=1413431634&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:pjDcfQw3DZ2F7turae_nygDElvQ">
+  
+  
+  
+  <title>taobao - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="taobao"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">taobao</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="taobao-客户端架构"><a href="#taobao-客户端架构" class="headerlink" title="taobao 客户端架构"></a>taobao 客户端架构</h1><h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><h4 id="WindVane"><a href="#WindVane" class="headerlink" title="WindVane"></a>WindVane</h4><ul>
+<li><p>衔接 Android&#x2F;iOS 的导航交互及动画</p>
+</li>
+<li><p>URL总线（对接Native UI总线）</p>
+</li>
+<li><p>JS Bridge：JS &lt;-&gt; Native（+ 性能及安全性增强）</p>
+</li>
+<li><p>缓存 &amp; 预缓存（兼容Cache-Control + AppCache）</p>
+</li>
+<li><p>数据采集、本地&#x2F;网络性能监控</p>
+</li>
+<li><p>安全加固、审核、隔离，人机识别</p>
+</li>
+<li><p>增强的网络层（SPDY、DNS旁路解析等）</p>
+</li>
+</ul>
+<h3 id="核心概念-归一、轻量、透明、延展、敏捷"><a href="#核心概念-归一、轻量、透明、延展、敏捷" class="headerlink" title="核心概念: 归一、轻量、透明、延展、敏捷"></a>核心概念: <em>归一、轻量、透明、延展、敏捷</em></h3><h1 id="1-归一"><a href="#1-归一" class="headerlink" title="1. 归一"></a>1. 归一</h1><blockquote>
+<p>一切皆组件：告别插件，拥抱组件（bundle）</p>
+</blockquote>
+<p><img src="http://lijuren.qiniudn.com/product/lijuren/img/51.pic.jpg?attname=&e=1413431634&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:pjDcfQw3DZ2F7turae_nygDElvQ" srcset="/img/loading.gif" lazyload></p>
+<h1 id="2-轻量"><a href="#2-轻量" class="headerlink" title="2. 轻量"></a>2. 轻量</h1><blockquote>
+<p>微内核：只负责最基础的管理职能（~150K）</p>
+</blockquote>
+<p>1 启动流程</p>
+<ul>
+<li>容器初始化</li>
+<li>类加载（首次启动还需dexopt）</li>
+<li>核心中间件初始化（可异步）</li>
+<li>启动入口Bundle</li>
+</ul>
+<p>2  组件管理：只负责『添加』、『删除』、『替换』（支持批量事务化）</p>
+<ul>
+<li>与上层的动态部署组件配合完成组件的在线升级</li>
+</ul>
+<h1 id="3-透明"><a href="#3-透明" class="headerlink" title="3. 透明"></a>3. 透明</h1><blockquote>
+<p>透明的容器（Android）：Bundle 即 App，容器亦 OS<br>  生命周期管理：Bundle 开发与 App 开发的无差异化</p>
+</blockquote>
+<p><img src="http://lijuren.qiniudn.com/product/lijuren/img/3.pic.jpg?attname=&e=1413432218&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:-mv4Gg_75iOBvdPG30lezXoKw2o" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>总线</p>
+</blockquote>
+<ul>
+<li><h4 id="UI总线：以跨平台统一的URL作为寻址方式（Web、Android、iOS）"><a href="#UI总线：以跨平台统一的URL作为寻址方式（Web、Android、iOS）" class="headerlink" title="UI总线：以跨平台统一的URL作为寻址方式（Web、Android、iOS）"></a>UI总线：以跨平台统一的URL作为寻址方式（Web、Android、iOS）</h4></li>
+<li><p>item.taobao.com&#x2F;… → DetailActivity &#x2F; TBTradeDetailViewController</p>
+</li>
+<li><p>自动降级：没有 Bundle 承载的 URL，将自动以 Web 容器加载</p>
+</li>
+<li><p>Android：去中心化 + URL Hook &#x2F; iOS：中心分发（支持Hook）</p>
+</li>
+<li><h4 id="服务总线：基于接口的服务调用（Android：兼容原生AIDL）"><a href="#服务总线：基于接口的服务调用（Android：兼容原生AIDL）" class="headerlink" title="服务总线：基于接口的服务调用（Android：兼容原生AIDL）"></a>服务总线：基于接口的服务调用（Android：兼容原生AIDL）</h4></li>
+<li><p>[Android] 轻量化的服务启动（向下兼容原生的Service Binding）</p>
+</li>
+<li><p>[Android] 支持跨进程、跨App的服务部署</p>
+</li>
+<li><h4 id="消息总线：基于OS原生消息机制（Broadcast-x2F-NSNotification）"><a href="#消息总线：基于OS原生消息机制（Broadcast-x2F-NSNotification）" class="headerlink" title="消息总线：基于OS原生消息机制（Broadcast &#x2F; NSNotification）"></a>消息总线：基于OS原生消息机制（Broadcast &#x2F; NSNotification）</h4></li>
+<li><p>[Android] 进程内使用轻量级消息通道</p>
+</li>
+</ul>
+<h1 id="4-延展"><a href="#4-延展" class="headerlink" title="4. 延展"></a>4. 延展</h1><ul>
+<li><h4 id="标准化（Android）"><a href="#标准化（Android）" class="headerlink" title="标准化（Android）"></a>标准化（Android）</h4></li>
+<li><p>Bundle的交付产物：AAR，构建产物：AWB（相当于APK剔除了共享依赖）</p>
+</li>
+<li><p>Bundle间可跨进程，甚至跨App对接</p>
+</li>
+<li><h4 id="灵活性"><a href="#灵活性" class="headerlink" title="灵活性"></a>灵活性</h4></li>
+<li><p>Bundle的自由组装（手机淘宝、淘宝生活、码上淘）</p>
+</li>
+<li><p>Bundle对容器无依赖</p>
+</li>
+<li><h4 id="适应性：从微型App到巨型App，按需采用的容器能力"><a href="#适应性：从微型App到巨型App，按需采用的容器能力" class="headerlink" title="适应性：从微型App到巨型App，按需采用的容器能力"></a>适应性：从微型App到巨型App，按需采用的容器能力</h4></li>
+<li><p>容器完全独立的三大职能：启动加载、生命周期管理、组件管理</p>
+</li>
+<li><p>[Android] 三大总线均为OS能力的封装，具有极佳的互操作性</p>
+</li>
+<li><h4 id="从巨型App时代的臃肿，回归田园App时代的轻盈"><a href="#从巨型App时代的臃肿，回归田园App时代的轻盈" class="headerlink" title="从巨型App时代的臃肿，回归田园App时代的轻盈"></a>从巨型App时代的臃肿，回归田园App时代的轻盈</h4><ul>
+<li>开发：像微型App一样便捷的开发调试（不依赖容器）</li>
+<li>开发环境的Bundle构建速度：3~10秒</li>
+</ul>
+</li>
+<li><p>集成：极简的集成模型（直接集成Bundle的构建产物AWB）</p>
+</li>
+<li><p>测试：『重』bundle测试，『轻』集成测试</p>
+</li>
+<li><p>部署：自动化的 Bundle 在线部署</p>
+</li>
+</ul>
+<h1 id="5-敏捷"><a href="#5-敏捷" class="headerlink" title="5. 敏捷"></a>5. 敏捷</h1><blockquote>
+<p>『Move fast and break things』</p>
+</blockquote>
+<ul>
+<li>via Hot Patch</li>
+<li>线上严重问题的快速修复（小时级的响应时间）</li>
+<li>可对 Android Framework 代码打补丁</li>
+<li>AOP 编码形式</li>
+<li>Before &#x2F; After &#x2F; Replace 某个方法</li>
+<li>支撑了『Project Nish』（目前尚未公开的神秘项目）</li>
+<li>暂时只支持 Dalvik，即将适配 ART 和 阿里云OS</li>
+</ul>
+<h1 id="回顾2010年-2014年"><a href="#回顾2010年-2014年" class="headerlink" title="回顾2010年-2014年"></a>回顾2010年-2014年</h1><blockquote>
+<p>痛点：</p>
+</blockquote>
+<ul>
+<li>协同方式</li>
+<li>迭代依赖</li>
+<li>分支管理</li>
+<li>合并依赖关系过于复杂！</li>
+<li>调试自测效率</li>
+<li>模块依赖下的不稳定因素</li>
+<li>业务多，回归成本大</li>
+<li>测试资源严重不足！其他模块引起的不稳定性因素</li>
+<li>发布的灵活性</li>
+<li>版本发布无法快速响应</li>
+<li>线上已发布版本稳定性</li>
+<li>灰度以及线上版本crash难以修复</li>
+</ul>
+<blockquote>
+<p>解决思路:围绕着开发效率和性能稳定性等一系列问题</p>
+</blockquote>
+<ul>
+<li><p>工程拆分</p>
+<ul>
+<li>支持多团队并行开发<ul>
+<li>并行开发(<em>业务解耦</em>)</li>
+<li>独立调试(<em>集成之前，在稳定环境下测试</em>)</li>
+<li>易于集成(<em>修改配置完成集成</em>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>架构重构</p>
+<ul>
+<li>重新梳理容器和总线规则<ul>
+<li>迭代开发，并行开发能力差</li>
+<li>耦合严重，核心功能（URL导航）复杂</li>
+<li>试错成本过高，增加减少业务带来的成本</li>
+<li>快速迭代下的稳定性问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>配套工具</p>
+<ul>
+<li><p>使用有力工具增加开发效率</p>
+<ul>
+<li>工程拆分遇到的问题<ul>
+<li>频繁的更换spec</li>
+<li>源码引入造成的pod update缓慢等原因</li>
+<li>开发阶段集成阶段等问题</li>
+</ul>
+</li>
+<li>工具解决<ul>
+<li>摩天轮自动打包平台（自动生成spec，framework引入）</li>
+<li>开发-集成-灰度，多阶段管理</li>
+</ul>
+</li>
+<li>其他工具解决的问题<ul>
+<li>核心链路性能监控平台</li>
+<li>Crash分析平台</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>分而治之 一切皆组件</p>
+</blockquote>
+<p><img src="http://lijuren.qiniudn.com/product/lijuren/img/4.pic_hd.jpg?attname=&e=1413434787&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:doCsWB69uJuPiC_Y07wq5cTsutw" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://lijuren.qiniudn.com/product/lijuren/img/6.pic_hd.jpg?attname=&e=1413434962&token=v0XCq4HVKSEf3J_GO6tr4uM1utAnXNKgxmfMJhb3:7wDX44tvwe9DxGOsqGhCNkHEfZQ" srcset="/img/loading.gif" lazyload></p>
+<h1 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h1><ul>
+<li><p>Bundle重组，互通有无</p>
+<ul>
+<li>业务复用，减少人力</li>
+<li>基础复用，做深做精</li>
+<li>敏捷开发，快速试错</li>
+</ul>
+</li>
+<li><p>开发透明，实时发版</p>
+<ul>
+<li>动静结合，开发透明</li>
+<li>动态部署，渠道推送</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>taobao</div>
+      <div>http://example.com/2023/03/22/taobao/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/systemtoolswangluoshipeiguanli/" title="systemtoolswangluoshipeiguanli">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">systemtoolswangluoshipeiguanli</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/te/" title="te">
+                        <span class="hidden-mobile">te</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

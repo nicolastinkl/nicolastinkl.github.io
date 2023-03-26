@@ -1,0 +1,968 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JavaScript 风格指南&#x2F;编码规范 基本类型：当你访问基本类型时，你是直接对它的值进行操作。  string  number  boolean  null  undefined   var foo &#x3D; 1,bar &#x3D; foo;bar &#x3D; 9;console.log(foo, bar); &#x2F;&#x2F; &#x3D;&gt; 1, 9  obj">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript">
+<meta property="og:url" content="http://example.com/2023/03/22/javascript/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="JavaScript 风格指南&#x2F;编码规范 基本类型：当你访问基本类型时，你是直接对它的值进行操作。  string  number  boolean  null  undefined   var foo &#x3D; 1,bar &#x3D; foo;bar &#x3D; 9;console.log(foo, bar); &#x2F;&#x2F; &#x3D;&gt; 1, 9  obj">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.726Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>javascript - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="javascript"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          137 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">javascript</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="JavaScript-风格指南-x2F-编码规范"><a href="#JavaScript-风格指南-x2F-编码规范" class="headerlink" title="JavaScript 风格指南&#x2F;编码规范"></a>JavaScript 风格指南&#x2F;编码规范</h1><ul>
+<li><p>基本类型：当你访问基本类型时，你是直接对它的值进行操作。</p>
+</li>
+<li><p>string</p>
+</li>
+<li><p>number</p>
+</li>
+<li><p>boolean</p>
+</li>
+<li><p>null</p>
+</li>
+<li><p>undefined</p>
+</li>
+</ul>
+<p>var foo &#x3D; 1,<br>bar &#x3D; foo;<br>bar &#x3D; 9;<br>console.log(foo, bar); &#x2F;&#x2F; &#x3D;&gt; 1, 9</p>
+<ul>
+<li>object</li>
+<li>array</li>
+<li>function</li>
+</ul>
+<p>var foo &#x3D; [1, 2],<br>bar &#x3D; foo;<br>bar[0] &#x3D; 9;<br>console.log(foo[0], bar[0]); &#x2F;&#x2F; &#x3D;&gt; 9, 9</p>
+<ul>
+<li>使用字面量语法来创建对象</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var item &#x3D; new Object();<br>&#x2F;&#x2F; good<br>var item &#x3D; {};</p>
+<ul>
+<li>不要使用保留字作为“键值”，因为在IE8不能运行。More info</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var superman &#x3D; {<br>default: { clark: ‘kent’ },<br>private: true<br>};<br>&#x2F;&#x2F; good<br>var superman &#x3D; {<br>defaults: { clark: ‘kent’ },<br>hidden: true<br>};</p>
+<ul>
+<li>使用容易理解的同义词来替代保留字</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var superman &#x3D; {<br>class: ‘alien’<br>};<br>&#x2F;&#x2F; bad<br>var superman &#x3D; {<br>klass: ‘alien’<br>};<br>&#x2F;&#x2F; good<br>var superman &#x3D; {<br>type: ‘alien’<br>};</p>
+<ul>
+<li>使用字面量语法来创建数组</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var items &#x3D; new Array();<br>&#x2F;&#x2F; good<br>var items &#x3D; [];</p>
+<ul>
+<li>如果你不知道数组长度，数组添加成员使用push方法。</li>
+<li></li>
+</ul>
+<p>var someStack &#x3D; [];<br>&#x2F;&#x2F; bad<br>someStack[someStack.length] &#x3D; ‘abracadabra’;<br>&#x2F;&#x2F; good<br>someStack.push(‘abracadabra’);</p>
+<ul>
+<li>当你需要复制一个数组时，使用数组的slice方法。jsPerf</li>
+<li></li>
+</ul>
+<p>var len &#x3D; items.length,<br>itemsCopy &#x3D; [],<br>i;<br>&#x2F;&#x2F; bad<br>for (i &#x3D; 0; i &lt; len; i++) {<br>itemsCopy[i] &#x3D; items[i];<br>}<br>&#x2F;&#x2F; good<br>itemsCopy &#x3D; items.slice();</p>
+<ul>
+<li>当你需要把“类似数组对象”转为数组时，使用数组的slice方法。</li>
+<li></li>
+</ul>
+<p>function trigger() {<br>var args &#x3D; Array.prototype.slice.call(arguments);<br>…<br>}</p>
+<ul>
+<li>字符串使用单引号‘’</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var name &#x3D; “Bob Parr”;<br>&#x2F;&#x2F; good<br>var name &#x3D; ‘Bob Parr’;<br>&#x2F;&#x2F; bad<br>var fullName &#x3D; “Bob “ + this.lastName;<br>&#x2F;&#x2F; good<br>var fullName &#x3D; ‘Bob ‘ + this.lastName;</p>
+<ul>
+<li>大于80个元素的字符串需要通过分隔符进行多行操作。</li>
+<li>注意：如果在长字符串中过度使用分隔符会影响性能。. jsPerf &amp; Discussion</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var errorMessage &#x3D; ‘This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.’;<br>&#x2F;&#x2F; bad<br>var errorMessage &#x3D; ‘This is a super long error that was thrown because<br>of Batman. When you stop to think about how Batman had anything to do<br>with this, you would get nowhere<br>fast.’;<br>&#x2F;&#x2F; good<br>var errorMessage &#x3D; ‘This is a super long error that was thrown because ‘ +<br>‘of Batman. When you stop to think about how Batman had anything to do ‘ +<br>‘with this, you would get nowhere fast.’;</p>
+<ul>
+<li>通过编程的方式创建字符串，应该使用数组的join方法，而不是字符串链接方法。特别是对于IE而言。 jsPerf.</li>
+<li></li>
+</ul>
+<p>var items,<br>messages,<br>length,<br>i;<br>messages &#x3D; [{<br>state: ‘success’,<br>message: ‘This one worked.’<br>}, {<br>state: ‘success’,<br>message: ‘This one worked as well.’<br>}, {<br>state: ‘error’,<br>message: ‘This one did not work.’<br>}];<br>length &#x3D; messages.length;<br>&#x2F;&#x2F; bad<br>function inbox(messages) {<br>items &#x3D; ‘<ul>‘;<br>for (i &#x3D; 0; i &lt; length; i++) {<br>items +&#x3D; ‘<li>‘ + messages[i].message + ‘</li>‘;<br>}<br>return items + ‘</ul>‘;<br>}<br>&#x2F;&#x2F; good<br>function inbox(messages) {<br>items &#x3D; [];<br>for (i &#x3D; 0; i &lt; length; i++) {<br>items[i] &#x3D; messages[i].message;<br>}<br>return ‘<ul><li>‘ + items.join(‘</li><li>‘) + ‘</li></ul>‘;</p>
+<ul>
+<li>函数表达式</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; anonymous function expression<br>var anonymous &#x3D; function() {<br>return true;<br>};<br>&#x2F;&#x2F; named function expression<br>var named &#x3D; function named() {<br>return true;<br>};<br>&#x2F;&#x2F; immediately-invoked function expression (IIFE)<br>(function() {<br>console.log(‘Welcome to the Internet. Please follow me.’);<br>})();</p>
+<ul>
+<li>不要直接在非函数块（if，while等）里声明一个函数，最好将函数赋值给一个变量。虽然浏览器允许你在非函数块中声明函数，但是由于不同的浏览器对Javascript的解析方式不同，这样做就很可能造成麻烦。</li>
+<li>注意：ECMA-262 将块定义为一组语句，而函数声明不是语句。Read ECMA-262′s note on this issue</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>if (currentUser) {<br>function test() {<br>console.log(‘Nope.’);<br>}<br>}<br>&#x2F;&#x2F; good<br>var test;<br>if (currentUser) {<br>test &#x3D; function test() {<br>console.log(‘Yup.’);<br>};<br>}</p>
+<ul>
+<li>不要将参数命名为arguments，它将在每个函数的作用范围内优先于arguments对象。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function nope(name, options, arguments) {<br>&#x2F;&#x2F; …stuff…<br>}<br>&#x2F;&#x2F; good<br>function yup(name, options, args) {<br>&#x2F;&#x2F; …stuff…<br>}</p>
+<ul>
+<li>使用点符号 . 来访问属性</li>
+<li></li>
+</ul>
+<p>var luke &#x3D; {<br>jedi: true,<br>age: 28<br>};<br>&#x2F;&#x2F; bad<br>var isJedi &#x3D; luke[‘jedi’];<br>&#x2F;&#x2F; good<br>var isJedi &#x3D; luke.jedi;</p>
+<ul>
+<li>当你在变量中访问属性时，使用[ ]符号</li>
+<li></li>
+</ul>
+<p>var luke &#x3D; {<br>jedi: true,<br>age: 28<br>};<br>function getProp(prop) {<br>return luke[prop];<br>}<br>var isJedi &#x3D; getProp(‘jedi’);</p>
+<ul>
+<li>使用var来声明变量，否则将声明全局变量，我们需要尽量避免污染全局命名空间，Captain Planet这样警告过我们。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>superPower &#x3D; new SuperPower();<br>&#x2F;&#x2F; good<br>var superPower &#x3D; new SuperPower();</p>
+<ul>
+<li>多个变量时只使用一个var声明，每个变量占一新行。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var items &#x3D; getItems();<br>var goSportsTeam &#x3D; true;<br>var dragonball &#x3D; ‘z’;<br>&#x2F;&#x2F; good<br>var items &#x3D; getItems(),<br>goSportsTeam &#x3D; true,<br>dragonball &#x3D; ‘z’;</p>
+<ul>
+<li>最后再声明未赋值的变量，这对你之后需要依赖之前变量的变量赋值会有帮助。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var i, len, dragonball,<br>items &#x3D; getItems(),<br>goSportsTeam &#x3D; true;<br>&#x2F;&#x2F; bad<br>var i, items &#x3D; getItems(),<br>dragonball,<br>goSportsTeam &#x3D; true,<br>len;<br>&#x2F;&#x2F; good<br>var items &#x3D; getItems(),<br>goSportsTeam &#x3D; true,<br>dragonball,<br>length,<br>i;<br>·         在范围内将变量赋值置顶，这有助于避免变量声明和赋值提升相关的问题<br>&#x2F;&#x2F; bad<br>function() {<br>test();<br>console.log(‘doing stuff..’);<br>&#x2F;&#x2F;..other stuff..<br>var name &#x3D; getName();<br>if (name &#x3D;&#x3D;&#x3D; ‘test’) {<br>return false;<br>}<br>return name;<br>}<br>&#x2F;&#x2F; good<br>function() {<br>var name &#x3D; getName();<br>test();<br>console.log(‘doing stuff..’);<br>&#x2F;&#x2F;..other stuff..<br>if (name &#x3D;&#x3D;&#x3D; ‘test’) {<br>return false;<br>}<br>return name;<br>}<br>&#x2F;&#x2F; bad<br>function() {<br>var name &#x3D; getName();<br>if (!arguments.length) {<br>return false;<br>}<br>return true;<br>}<br>&#x2F;&#x2F; good<br>function() {<br>if (!arguments.length) {<br>return false;<br>}<br>var name &#x3D; getName();<br>return true;<br>}</p>
+<ul>
+<li>变量声明在范围内提升，但赋值并没有提升</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; we know this wouldn’t work (assuming there<br>&#x2F;&#x2F; is no notDefined global variable)<br>function example() {<br>console.log(notDefined); &#x2F;&#x2F; &#x3D;&gt; throws a ReferenceError<br>}<br>&#x2F;&#x2F; creating a variable declaration after you<br>&#x2F;&#x2F; reference the variable will work due to<br>&#x2F;&#x2F; variable hoisting. Note: the assignment<br>&#x2F;&#x2F; value of <code>true</code> is not hoisted.<br>function example() {<br>console.log(declaredButNotAssigned); &#x2F;&#x2F; &#x3D;&gt; undefined<br>var declaredButNotAssigned &#x3D; true;<br>}<br>&#x2F;&#x2F; The interpreter is hoisting the variable<br>&#x2F;&#x2F; declaration to the top of the scope.<br>&#x2F;&#x2F; Which means our example could be rewritten as:<br>function example() {<br>var declaredButNotAssigned;<br>console.log(declaredButNotAssigned); &#x2F;&#x2F; &#x3D;&gt; undefined<br>declaredButNotAssigned &#x3D; true;<br>}</p>
+<ul>
+<li>匿名函数表达式提升变量名，但函数赋值并没有提升，</li>
+<li></li>
+</ul>
+<p>· function example() {<br>console.log(anonymous); &#x2F;&#x2F; &#x3D;&gt; undefined<br>anonymous(); &#x2F;&#x2F; &#x3D;&gt; TypeError anonymous is not a function<br>var anonymous &#x3D; function() {<br>console.log(‘anonymous function expression’);<br>};<br>}</p>
+<ul>
+<li>命名函数表达式提升变量名，但函数名字和函数体并没有提升。</li>
+<li></li>
+</ul>
+<p>function example() {<br>console.log(named); &#x2F;&#x2F; &#x3D;&gt; undefined<br>named(); &#x2F;&#x2F; &#x3D;&gt; TypeError named is not a function<br>superPower(); &#x2F;&#x2F; &#x3D;&gt; ReferenceError superPower is not defined<br>var named &#x3D; function superPower() {<br>console.log(‘Flying’);<br>};<br>}<br>&#x2F;&#x2F; the same is true when the function name<br>&#x2F;&#x2F; is the same as the variable name.<br>function example() {<br>console.log(named); &#x2F;&#x2F; &#x3D;&gt; undefined<br>named(); &#x2F;&#x2F; &#x3D;&gt; TypeError named is not a function<br>var named &#x3D; function named() {<br>console.log(‘named’);<br>}<br>}</p>
+<ul>
+<li>函数声明能提升他们的函数名和函数体</li>
+<li></li>
+</ul>
+<p>function example() {<br>superPower(); &#x2F;&#x2F; &#x3D;&gt; Flying<br>function superPower() {<br>console.log(‘Flying’);<br>}<br>}</p>
+<ul>
+<li><p>更多的信息在JavaScript Scoping &amp; Hoisting by Ben Cherry</p>
+</li>
+<li><p>条件表达式和相等</p>
+</li>
+<li><p>条件表达式强制使用 ToBoolean方法进行解析，并遵从以下简单的规则Object ：返回 true</p>
+</li>
+<li><p>Undefined： 返回 false</p>
+</li>
+<li><p>Null： 返回 false</p>
+</li>
+<li><p>Booleans ：返回 boolean的值</p>
+</li>
+<li><p>Numbers ：如果是+0, -0, or NaN返回 false, 其他则 true</p>
+</li>
+<li><p>Strings ：空字符串’’返回 false 其他返回true</p>
+</li>
+<li></li>
+</ul>
+<p>if ([0]) {<br>&#x2F;&#x2F; true<br>&#x2F;&#x2F; An array is an object, objects evaluate to true<br>}</p>
+<ul>
+<li>使用简易方式</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>if (name !&#x3D;&#x3D; ‘’) {<br>&#x2F;&#x2F; …stuff…<br>}<br>&#x2F;&#x2F; good<br>if (name) {<br>&#x2F;&#x2F; …stuff…<br>}<br>&#x2F;&#x2F; bad<br>if (collection.length &gt; 0) {<br>&#x2F;&#x2F; …stuff…<br>}<br>&#x2F;&#x2F; good<br>if (collection.length) {<br>&#x2F;&#x2F; …stuff…<br>}</p>
+<ul>
+<li><p>更多的信息查看 Truth Equality and JavaScript by Angus Croll</p>
+</li>
+<li><p>在多行块中使用大括号</p>
+</li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>if (test)<br>return false;<br>&#x2F;&#x2F; good<br>if (test) return false;<br>&#x2F;&#x2F; good<br>if (test) {<br>return false;<br>}<br>&#x2F;&#x2F; bad<br>function() { return false; }<br>&#x2F;&#x2F; good<br>function() {<br>return false;<br>}</p>
+<ul>
+<li>多行注释使用 &#x2F;** … *&#x2F; ，包括描述，指定类型、所有参数的值和返回值</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>&#x2F;&#x2F; make() returns a new element<br>&#x2F;&#x2F; based on the passed in tag name<br>&#x2F;&#x2F;<br>&#x2F;&#x2F; @param <String> tag<br>&#x2F;&#x2F; @return <Element> element<br>function make(tag) {<br>&#x2F;&#x2F; …stuff…<br>return element;<br>}<br>&#x2F;&#x2F; good<br>&#x2F;**</p>
+<ul>
+<li><p>make() returns a new element</p>
+</li>
+<li><p>based on the passed in tag name</p>
+</li>
+<li></li>
+<li><p>@param <String> tag</p>
+</li>
+<li><p>@return <Element> element<br>*&#x2F;<br>function make(tag) {<br>&#x2F;&#x2F; …stuff…<br>return element;<br>}</p>
+<ul>
+<li>单行注释使用 &#x2F;&#x2F;, 在注释的内容前另起一行进行单行注释，并在注释前留一空行。</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var active &#x3D; true;  &#x2F;&#x2F; is current tab<br>&#x2F;&#x2F; good<br>&#x2F;&#x2F; is current tab<br>var active &#x3D; true;<br>&#x2F;&#x2F; bad<br>function getType() {<br>console.log(‘fetching type…’);<br>&#x2F;&#x2F; set the default type to ‘no type’<br>var type &#x3D; this._type || ‘no type’;<br>return type;<br>}<br>&#x2F;&#x2F; good<br>function getType() {<br>console.log(‘fetching type…’);<br>&#x2F;&#x2F; set the default type to ‘no type’<br>var type &#x3D; this._type || ‘no type’;<br>return type;<br>}</p>
+<ul>
+<li>在你的注释加上FIXME或TODO的前缀可以帮助其他开发者迅速理解你指出的问题和需要的帮助，以及你建议需要完善的解决问题，这跟常规注释不一样因为其具有可行动性，FIXME——是需要解决的而TODO——是需要完善的</li>
+<li>使用&#x2F;&#x2F; FIXME: 来标记问题</li>
+<li></li>
+</ul>
+<p>function Calculator() {<br>&#x2F;&#x2F; FIXME: shouldn’t use a global here<br>total &#x3D; 0;<br>return this;<br>}</p>
+<ul>
+<li>使用 &#x2F;&#x2F; TODO：给待解决问题进行标注</li>
+<li></li>
+</ul>
+<p>function Calculator() {<br>&#x2F;&#x2F; TODO: total should be configurable by an options param<br>this.total &#x3D; 0;<br>return this;<br>}</p>
+<ul>
+<li>使用tabs设置两个空格</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function() {<br>∙∙∙∙var name;<br>}<br>&#x2F;&#x2F; bad<br>function() {<br>∙var name;<br>}<br>&#x2F;&#x2F; good<br>function() {<br>∙∙var name;<br>}</p>
+<ul>
+<li>分支前面空一格</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function test(){<br>console.log(‘test’);<br>}<br>&#x2F;&#x2F; good<br>function test() {<br>console.log(‘test’);<br>}<br>&#x2F;&#x2F; bad<br>dog.set(‘attr’,{<br>age: ‘1 year’,<br>breed: ‘Bernese Mountain Dog’<br>});<br>&#x2F;&#x2F; good<br>dog.set(‘attr’, {<br>age: ‘1 year’,<br>breed: ‘Bernese Mountain Dog’<br>});</p>
+<ul>
+<li>操作符前后空一格</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var x&#x3D;y+5;<br>&#x2F;&#x2F; good<br>var x &#x3D; y + 5;</p>
+<ul>
+<li>文件末尾用换行符结束</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>(function(global) {<br>&#x2F;&#x2F; …stuff…<br>})(this);<br>&#x2F;&#x2F; bad<br>(function(global) {<br>&#x2F;&#x2F; …stuff…<br>})(this);<br>&#x2F;&#x2F; good<br>(function(global) {<br>&#x2F;&#x2F; …stuff…<br>})(this)</p>
+<ul>
+<li>使用长方法链时使用缩进</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>$(‘#items’).find(‘.selected’).highlight().end().find(‘.open’).updateCount();<br>&#x2F;&#x2F; good<br>$(‘#items’)<br>.find(‘.selected’)<br>.highlight()<br>.end()<br>.find(‘.open’)<br>.updateCount();<br>&#x2F;&#x2F; bad<br>var leds &#x3D; stage.selectAll(‘.led’).data(data).enter().append(‘svg:svg’).class(‘led’, true)<br>.attr(‘width’,  (radius + margin) * 2).append(‘svg:g’)<br>.attr(‘transform’, ‘translate(‘ + (radius + margin) + ‘,’ + (radius + margin) + ‘)’)<br>.call(tron.led);<br>&#x2F;&#x2F; good<br>var leds &#x3D; stage.selectAll(‘.led’)<br>.data(data)<br>.enter().append(‘svg:svg’)<br>.class(‘led’, true)<br>.attr(‘width’,  (radius + margin) * 2)<br>.append(‘svg:g’)<br>.attr(‘transform’, ‘translate(‘ + (radius + margin) + ‘,’ + (radius + margin) + ‘)’)<br>.call(tron.led);</p>
+<ul>
+<li>不要在句首使用逗号</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var once<br>, upon<br>, aTime;<br>&#x2F;&#x2F; good<br>var once,<br>upon,<br>aTime;<br>&#x2F;&#x2F; bad<br>var hero &#x3D; {<br>firstName: ‘Bob’<br>, lastName: ‘Parr’<br>, heroName: ‘Mr. Incredible’<br>, superPower: ‘strength’<br>};<br>&#x2F;&#x2F; good<br>var hero &#x3D; {<br>firstName: ‘Bob’,<br>lastName: ‘Parr’,<br>heroName: ‘Mr. Incredible’,<br>superPower: ‘strength’<br>};</p>
+<ul>
+<li>不要使用多余的逗号，这在IE6&#x2F;7 和 IE9的怪异模式中会造成问题，同样，在ES3中有些实现，如果使用多余的逗号将增加数组的长度，这在ES5中有阐明(source):</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var hero &#x3D; {<br>firstName: ‘Kevin’,<br>lastName: ‘Flynn’,<br>};<br>var heroes &#x3D; [<br>‘Batman’,<br>‘Superman’,<br>];<br>&#x2F;&#x2F; good<br>var hero &#x3D; {<br>firstName: ‘Kevin’,<br>lastName: ‘Flynn’<br>};<br>var heroes &#x3D; [<br>‘Batman’,<br>‘Superman’<br>];<br>   *</p>
+<p>&#x2F;&#x2F; bad<br>(function() {<br>var name &#x3D; ‘Skywalker’<br>return name<br>})()<br>&#x2F;&#x2F; good<br>(function() {<br>var name &#x3D; ‘Skywalker’;<br>return name;<br>})();<br>&#x2F;&#x2F; good (guards against the function becoming an argument when two files with IIFEs are concatenated)<br>;(function() {<br>var name &#x3D; ‘Skywalker’;<br>return name;<br>})();</p>
+<ul>
+<li>转型&amp;强制</li>
+<li><ul>
+<li>在语句的开头执行强制转型。</li>
+</ul>
+</li>
+<li>Strings:</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F;  &#x3D;&gt; this.reviewScore &#x3D; 9;<br>&#x2F;&#x2F; bad<br>var totalScore &#x3D; this.reviewScore + ‘’;<br>&#x2F;&#x2F; good<br>var totalScore &#x3D; ‘’ + this.reviewScore;<br>&#x2F;&#x2F; bad<br>var totalScore &#x3D; ‘’ + this.reviewScore + ‘ total score’;<br>&#x2F;&#x2F; good<br>var totalScore &#x3D; this.reviewScore + ‘ total score’;</p>
+<ul>
+<li>使用parseInt对Numbers型进行强制转型。</li>
+<li></li>
+</ul>
+<p>var inputValue &#x3D; ‘4’;<br>&#x2F;&#x2F; bad<br>var val &#x3D; new Number(inputValue);<br>&#x2F;&#x2F; bad<br>var val &#x3D; +inputValue;<br>&#x2F;&#x2F; bad<br>var val &#x3D; inputValue &gt;&gt; 0;<br>&#x2F;&#x2F; bad<br>var val &#x3D; parseInt(inputValue);<br>&#x2F;&#x2F; good<br>var val &#x3D; Number(inputValue);<br>&#x2F;&#x2F; good<br>var val &#x3D; parseInt(inputValue, 10);</p>
+<ul>
+<li>如果出于某种原因你需要做些疯狂的事，而parseInt是你的瓶颈，出于性能考虑你需要使用位移，那么留下你的注释来解释原因。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; good<br>&#x2F;**</p>
+<ul>
+<li>parseInt was the reason my code was slow.</li>
+<li>Bitshifting the String to coerce it to a</li>
+<li>Number made it a lot faster.<br>*&#x2F;<br>var val &#x3D; inputValue &gt;&gt; 0;<ul>
+<li>注意：小心位移操作符，Numbers代表着64位的值，而位移操作符只能返回32位的整型，位移对于大于32位的整型的值会有不好的影响，32位最大的有符号整型是2,147,483,647。</li>
+<li>（有关讨论：Discussion）</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>2147483647 &gt;&gt; 0 &#x2F;&#x2F;&#x3D;&gt; 2147483647<br>2147483648 &gt;&gt; 0 &#x2F;&#x2F;&#x3D;&gt; -2147483648<br>2147483649 &gt;&gt; 0 &#x2F;&#x2F;&#x3D;&gt; -2147483647</p>
+<ul>
+<li>Booleans:</li>
+<li></li>
+</ul>
+<p>var age &#x3D; 0;<br>&#x2F;&#x2F; bad<br>var hasAge &#x3D; new Boolean(age);<br>&#x2F;&#x2F; good<br>var hasAge &#x3D; Boolean(age);<br>&#x2F;&#x2F; good<br>var hasAge &#x3D; !!age;</p>
+<ul>
+<li>不要使用一个字母命名，而应该用单词描述</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function q() {<br>&#x2F;&#x2F; …stuff…<br>}<br>&#x2F;&#x2F; good<br>function query() {<br>&#x2F;&#x2F; ..stuff..<br>}</p>
+<ul>
+<li>使用驼峰法来给对象、函数、实例命名。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var OBJEcttsssss &#x3D; {};<br>var this_is_my_object &#x3D; {};<br>function c() {}<br>var u &#x3D; new user({<br>name: ‘Bob Parr’<br>});<br>&#x2F;&#x2F; good<br>var thisIsMyObject &#x3D; {};<br>function thisIsMyFunction() {}<br>var user &#x3D; new User({<br>name: ‘Bob Parr’<br>});</p>
+<ul>
+<li>使用驼峰式大小写给构造函数和类命名。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function user(options) {<br>this.name &#x3D; options.name;<br>}<br>var bad &#x3D; new user({<br>name: ‘nope’<br>});<br>&#x2F;&#x2F; good<br>function User(options) {<br>this.name &#x3D; options.name;<br>}<br>var good &#x3D; new User({<br>name: ‘yup’<br>});</p>
+<ul>
+<li>使用下划线前缀_来命名私有属性。</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>this.<strong>firstName</strong> &#x3D; ‘Panda’;<br>this.firstName_ &#x3D; ‘Panda’;<br>&#x2F;&#x2F; good<br>this._firstName &#x3D; ‘Panda’;</p>
+<ul>
+<li>储存this的引用使用_this</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function() {<br>var self &#x3D; this;<br>return function() {<br>console.log(self);<br>};<br>}<br>&#x2F;&#x2F; bad<br>function() {<br>var that &#x3D; this;<br>return function() {<br>console.log(that);<br>};<br>}<br>&#x2F;&#x2F; good<br>function() {<br>var _this &#x3D; this;<br>return function() {<br>console.log(_this);<br>};<br>}</p>
+<ul>
+<li>给你的函数命名，这有助于堆栈重写</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var log &#x3D; function(msg) {<br>console.log(msg);<br>};<br>&#x2F;&#x2F; good<br>var log &#x3D; function log(msg) {<br>console.log(msg);<br>};</p>
+<ul>
+<li><p>注意：IE8以下还有一些关于命名函数表达式的怪癖。详情见<a target="_blank" rel="noopener" href="http://kangax.github.io/nfe/">http://kangax.github.io/nfe/</a></p>
+</li>
+<li><p>如果你创建访问函数使用getVal() 和 setVal(‘hello’)</p>
+</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>dragon.age();<br>&#x2F;&#x2F; good<br>dragon.getAge();<br>&#x2F;&#x2F; bad<br>dragon.age(25);<br>&#x2F;&#x2F; good<br>dragon.setAge(25);</p>
+<p>如果这个属性是boolean，使用isVal() 或者 hasVal()<br>&#x2F;&#x2F; bad if (!dragon.age()) { return false; } &#x2F;&#x2F; good if (!dragon.hasAge()) { return false; }<br>.也可以使用get() 和 set()函数来创建，但是必须一致。</p>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>function Jedi(options) {<br>options || (options &#x3D; {});<br>var lightsaber &#x3D; options.lightsaber || ‘blue’;<br>this.set(‘lightsaber’, lightsaber);<br>}<br>Jedi.prototype.set &#x3D; function(key, val) {<br>this[key] &#x3D; val;<br>};<br>Jedi.prototype.get &#x3D; function(key) {<br>return this[key];<br>};<br>      * 给原型对象添加方法，相比用新对象重写原型，重写原型会有继承问题。如果你要重写原型方法，请重写基础方法。<br>      *</p>
+<p>function Jedi() {<br>console.log(‘new jedi’);<br>}<br>&#x2F;&#x2F; bad<br>Jedi.prototype &#x3D; {<br>fight: function fight() {<br>console.log(‘fighting’);<br>},<br>block: function block() {<br>console.log(‘blocking’);<br>}<br>};<br>&#x2F;&#x2F; good<br>Jedi.prototype.fight &#x3D; function fight() {<br>console.log(‘fighting’);<br>};<br>Jedi.prototype.block &#x3D; function block() {<br>console.log(‘blocking’);<br>};<br>      * 方法返回this有助于方法链<br>      *</p>
+<p>&#x2F;&#x2F; bad<br>Jedi.prototype.jump &#x3D; function() {<br>this.jumping &#x3D; true;<br>return true;<br>};<br>Jedi.prototype.setHeight &#x3D; function(height) {<br>this.height &#x3D; height;<br>};<br>var luke &#x3D; new Jedi();<br>luke.jump(); &#x2F;&#x2F; &#x3D;&gt; true<br>luke.setHeight(20); &#x2F;&#x2F; &#x3D;&gt; undefined<br>&#x2F;&#x2F; good<br>Jedi.prototype.jump &#x3D; function() {<br>this.jumping &#x3D; true;<br>return this;<br>};<br>Jedi.prototype.setHeight &#x3D; function(height) {<br>this.height &#x3D; height;<br>return this;<br>};<br>var luke &#x3D; new Jedi();<br>luke.jump()<br>.setHeight(20);<br>      * 可以重写常规的toString()方法。但必须保证可以成功运行并没有别的影响<br>      *</p>
+<p>function Jedi(options) {<br>options || (options &#x3D; {});<br>this.name &#x3D; options.name || ‘no name’;<br>}<br>Jedi.prototype.getName &#x3D; function getName() {<br>return this.name;<br>};<br>Jedi.prototype.toString &#x3D; function toString() {<br>return ‘Jedi - ‘ + this.getName();<br>};<br>      * 将为事件加载数据时（不管是DOM事件还是其他专用事件的，比如Backbone事件）用散列表来取代原始值。因为这将允许后续添加更多的数据载入事件而不用更新每个事件的处理程序。例如：</p>
+<p>&#x2F;&#x2F; bad<br>$(this).trigger(‘listingUpdated’, listing.id);<br>…<br>$(this).on(‘listingUpdated’, function(e, listingId) {<br>&#x2F;&#x2F; do something with listingId<br>});<br>更好的方式：</p>
+<p>&#x2F;&#x2F; good<br>$(this).trigger(‘listingUpdated’, { listingId : listing.id });<br>…<br>$(this).on(‘listingUpdated’, function(e, data) {<br>&#x2F;&#x2F; do something with data.listingId<br>});</p>
+<ul>
+<li><p>模块应该以a！开始，以确保当模块忘记包含最后一个分号时，在脚本连接时不会报错。</p>
+</li>
+<li><p>文档需要用驼峰法命名，同一文件内要用一样的名字以及要与单个输出相匹配。</p>
+</li>
+<li><p>增加一个叫noConflict()的方法，使模块输出早期版本并返回。</p>
+</li>
+<li><p>在模块开始的部位声明’use strict’。</p>
+</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; fancyInput&#x2F;fancyInput.js<br>!function(global) {<br>‘use strict’;<br>var previousFancyInput &#x3D; global.FancyInput;<br>function FancyInput(options) {<br>this.options &#x3D; options || {};<br>}<br>FancyInput.noConflict &#x3D; function noConflict() {<br>global.FancyInput &#x3D; previousFancyInput;<br>return FancyInput;<br>};<br>global.FancyInput &#x3D; FancyInput;<br>}(this);</p>
+<p>jQuery</p>
+<ul>
+<li>JQuery对象变量前缀使用$</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>var sidebar &#x3D; $(‘.sidebar’);<br>&#x2F;&#x2F; good<br>var $sidebar &#x3D; $(‘.sidebar’);</p>
+<ul>
+<li>jQuery缓存查找</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>function setSidebar() {<br>$(‘.sidebar’).hide();<br>&#x2F;&#x2F; …stuff…<br>$(‘.sidebar’).css({<br>‘background-color’: ‘pink’<br>});<br>}<br>&#x2F;&#x2F; good<br>function setSidebar() {<br>var $sidebar &#x3D; $(‘.sidebar’);<br>$sidebar.hide();<br>&#x2F;&#x2F; …stuff…<br>$sidebar.css({<br>‘background-color’: ‘pink’<br>});<br>}</p>
+<ul>
+<li><p>在DOM查询中使用层叠样式 $(‘.sidebar ul’)或parent &gt; child $(‘.sidebar &gt; ul’). jsPerf</p>
+</li>
+<li><p>使用find来查找jQuery对象</p>
+</li>
+<li></li>
+</ul>
+<p>&#x2F;&#x2F; bad<br>$(‘ul’, ‘.sidebar’).hide();<br>&#x2F;&#x2F; bad<br>$(‘.sidebar’).find(‘ul’).hide();<br>&#x2F;&#x2F; good<br>$(‘.sidebar ul’).hide();<br>&#x2F;&#x2F; good<br>$(‘.sidebar &gt; ul’).hide();<br>&#x2F;&#x2F; good<br>$sidebar.find(‘ul’).hide();</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>javascript</div>
+      <div>http://example.com/2023/03/22/javascript/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/linux/" title="linux">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">linux</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/mac_os_tools/" title="mac_os_tools">
+                        <span class="hidden-mobile">mac_os_tools</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

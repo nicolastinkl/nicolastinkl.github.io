@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="IOS Build Settings VariblesAlternate Titles  List of Xcode build variables Print a list of Xcode Build Settings Clang Environment Variables Canonical list of Xcode Environment Variables Is there a Can">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios_build_settings_varibles">
+<meta property="og:url" content="http://example.com/2023/03/22/ios_build_settings_varibles/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="IOS Build Settings VariblesAlternate Titles  List of Xcode build variables Print a list of Xcode Build Settings Clang Environment Variables Canonical list of Xcode Environment Variables Is there a Can">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.718Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>ios_build_settings_varibles - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ios_build_settings_varibles"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          22k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          180 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ios_build_settings_varibles</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="IOS-Build-Settings-Varibles"><a href="#IOS-Build-Settings-Varibles" class="headerlink" title="IOS Build Settings Varibles"></a>IOS Build Settings Varibles</h1><p>Alternate Titles</p>
+<ul>
+<li>List of Xcode build variables</li>
+<li>Print a list of Xcode Build Settings</li>
+<li>Clang Environment Variables</li>
+<li>Canonical list of Xcode Environment Variables<blockquote>
+<p>Is there a Canonical list of Xcode Environment Variables that can be used in Build Rules etc?</p>
+</blockquote>
+  $ xcodebuild -project myProj.xcodeproj -target “myTarg” -showBuildSettings</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-keyword">Variable</span>                                  Example<br>PATH                                      <span class="hljs-comment">&quot;/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin&quot;</span><br>LANG                                      <span class="hljs-comment">en_US.US-ASCII</span><br>IPHONEOS_DEPLOYMENT_TARGET                <span class="hljs-comment">4.1</span><br>ACTION                                    <span class="hljs-comment">build</span><br>AD_HOC_CODE_SIGNING_ALLOWED               <span class="hljs-comment">NO</span><br>ALTERNATE_GROUP                           <span class="hljs-comment">staff</span><br>ALTERNATE_MODE                            <span class="hljs-comment">u+w,go-w,a+rX</span><br>ALTERNATE_OWNER                           <span class="hljs-comment">username</span><br>ALWAYS_SEARCH_USER_PATHS                  <span class="hljs-comment">YES</span><br>APPLE_INTERNAL_DEVELOPER_DIR              /AppleInternal/<span class="hljs-comment">Developer</span><br>APPLE_INTERNAL_DIR                        /AppleInternal<br>APPLE_INTERNAL_DOCUMENTATION_DIR          /<span class="hljs-comment">AppleInternal</span>/Documentation<br>APPLE_INTERNAL_LIBRARY_DIR                /<span class="hljs-comment">AppleInternal</span>/Library<br>APPLE_INTERNAL_TOOLS                      /<span class="hljs-comment">AppleInternal</span>/Developer/<span class="hljs-comment">Tools</span><br>APPLY_RULES_IN_COPY_FILES                 <span class="hljs-comment">NO</span><br>ARCHS                                     <span class="hljs-comment">&quot;armv6 armv7&quot;</span><br>ARCHS_STANDARD_32_64_BIT                  <span class="hljs-comment">&quot;armv6 armv7&quot;</span><br>ARCHS_STANDARD_32_BIT                     <span class="hljs-comment">&quot;armv6 armv7&quot;</span><br>ARCHS_UNIVERSAL_IPHONE_OS                 <span class="hljs-comment">armv7</span><br>AVAILABLE_PLATFORMS                       <span class="hljs-comment">&quot;iphonesimulator macosx iphoneos&quot;</span><br>BUILD_COMPONENTS                          <span class="hljs-comment">&quot;headers build&quot;</span><br>BUILD_DIR                                 <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath&quot;</span><br>BUILD_ROOT                                <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath&quot;</span><br>BUILD_STYLE<br>BUILD_VARIANTS                             <span class="hljs-comment">normal</span><br>BUILT_PRODUCTS_DIR                         <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos&quot;</span><br>CACHE_ROOT                                 /var/<span class="hljs-comment">folders</span>/<span class="hljs-number">2</span>x/<span class="hljs-comment">rvb2r9s16mq6r318zxvn0lk80000gn</span>/C/<span class="hljs-comment">com.apple.Xcode.501</span><br>CCHROOT                                    /var/<span class="hljs-comment">folders</span>/<span class="hljs-number">2</span>x/<span class="hljs-comment">rvb2r9s16mq6r318zxvn0lk80000gn</span>/C/<span class="hljs-comment">com.apple.Xcode.501</span><br>CHMOD                                      /bin/<span class="hljs-comment">chmod</span><br>CHOWN                                      /usr/<span class="hljs-comment">sbin</span>/chown<br>CLASS_FILE_DIR                             <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/JavaClasses&quot;</span><br>CLEAN_PRECOMPS                             <span class="hljs-keyword">YES</span><br>CLONE_HEADERS                              <span class="hljs-keyword">NO</span><br>CODESIGNING_FOLDER_PATH                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/InstallationBuildProductsLocation/Applications/project.app&quot;</span><br>CODE_SIGNING_ALLOWED                       <span class="hljs-keyword">YES</span><br>CODE_SIGNING_REQUIRED                      <span class="hljs-keyword">YES</span><br>CODE_SIGN_CONTEXT_CLASS                    XCiPhoneOSCodeSignContext<br>CODE_SIGN_IDENTITY                         <span class="hljs-comment">&quot;iPhone Distribution&quot;</span><br>COMBINE_HIDPI_IMAGES                       <span class="hljs-keyword">NO</span><br>COMPOSITE_SDK_DIRS                         /<span class="hljs-comment">var</span>/folders/<span class="hljs-comment">2x</span>/rvb2r9s16mq6r318zxvn0lk80000gn/<span class="hljs-comment">C</span>/com.apple.Xcode<span class="hljs-number">.501</span>/<span class="hljs-comment">CompositeSDKs</span><br>COMPRESS_PNG_FILES                         <span class="hljs-comment">YES</span><br>CONFIGURATION                              <span class="hljs-comment">Distribution</span><br>CONFIGURATION_BUILD_DIR                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos&quot;</span><br>CONFIGURATION_TEMP_DIR                     <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos&quot;</span><br>CONTENTS_FOLDER_PATH                       <span class="hljs-comment">project.app</span>/Contents<br>COPYING_PRESERVES_HFS_DATA                 <span class="hljs-keyword">NO</span><br>COPY_PHASE_STRIP                           <span class="hljs-keyword">YES</span><br>COPY_RESOURCES_FROM_STATIC_FRAMEWORKS      <span class="hljs-keyword">YES</span><br>CP                                         /<span class="hljs-comment">bin</span>/cp<br>CURRENT_ARCH                               armv7<br>CURRENT_VARIANT                            <span class="hljs-built_in">normal</span><br>DEAD_CODE_STRIPPING                        <span class="hljs-keyword">YES</span><br>DEBUGGING_SYMBOLS                          <span class="hljs-keyword">YES</span><br>DEBUG_INFORMATION_FORMAT                   dwarf-with-dsym<br>DEPLOYMENT_LOCATION                        <span class="hljs-keyword">YES</span><br>DEPLOYMENT_POSTPROCESSING                  <span class="hljs-keyword">YES</span><br>DERIVED_FILES_DIR                          <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/DerivedSources&quot;</span><br>DERIVED_FILE_DIR                           <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/DerivedSources&quot;</span><br>DERIVED_SOURCES_DIR                        <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/DerivedSources&quot;</span><br>DEVELOPER_APPLICATIONS_DIR                 /<span class="hljs-comment">Developer</span>/Applications<br>DEVELOPER_BIN_DIR                          /<span class="hljs-comment">Developer</span>/usr/<span class="hljs-comment">bin</span><br>DEVELOPER_DIR                              /Developer<br>DEVELOPER_FRAMEWORKS_DIR                   /<span class="hljs-comment">Developer</span>/Library/<span class="hljs-comment">Frameworks</span><br>DEVELOPER_FRAMEWORKS_DIR_QUOTED            <span class="hljs-comment">&quot;\&quot;/Developer/Library/Frameworks\&quot;&quot;</span><br>DEVELOPER_LIBRARY_DIR                      /Developer/<span class="hljs-comment">Library</span><br>DEVELOPER_SDK_DIR                          /Developer/<span class="hljs-comment">SDKs</span><br>DEVELOPER_TOOLS_DIR                        /Developer/<span class="hljs-comment">Tools</span><br>DEVELOPER_USR_DIR                          /Developer/<span class="hljs-comment">usr</span><br>DEVELOPMENT_LANGUAGE                       <span class="hljs-comment">English</span><br>DOCUMENTATION_FOLDER_PATH                  <span class="hljs-comment">project.app</span>/English.lproj/<span class="hljs-comment">Documentation</span><br>DO_HEADER_SCANNING_IN_JAM                  <span class="hljs-comment">NO</span><br>DSTROOT                                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/InstallationBuildProductsLocation&quot;</span><br>DWARF_DSYM_FILE_NAME                       <span class="hljs-comment">project.app.dSYM</span><br>DWARF_DSYM_FILE_SHOULD_ACCOMPANY_PRODUCT   <span class="hljs-comment">NO</span><br>DWARF_DSYM_FOLDER_PATH                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos&quot;</span><br>EFFECTIVE_PLATFORM_NAME                    <span class="hljs-comment">-iphoneos</span><br>EMBEDDED_PROFILE_NAME                      <span class="hljs-comment">embedded.mobileprovision</span><br>ENABLE_HEADER_DEPENDENCIES                 <span class="hljs-comment">YES</span><br>ENABLE_OPENMP_SUPPORT                      <span class="hljs-comment">NO</span><br>ENTITLEMENTS_ALLOWED                       <span class="hljs-comment">YES</span><br>ENTITLEMENTS_REQUIRED                      <span class="hljs-comment">YES</span><br>EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS  <span class="hljs-comment">&quot;.svn CVS&quot;</span><br>EXECUTABLES_FOLDER_PATH                    <span class="hljs-comment">project.app</span>/Executables<br>EXECUTABLE_FOLDER_PATH                     project.app<br>EXECUTABLE_NAME                            project<br>EXECUTABLE_PATH                            project.app/<span class="hljs-comment">project</span><br>FILE_LIST                                  <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/Objects/LinkFileList&quot;</span><br>FIXED_FILES_DIR                            <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/FixedFiles&quot;</span><br>FRAMEWORKS_FOLDER_PATH                     <span class="hljs-comment">project.app</span>/Frameworks<br>FRAMEWORK_FLAG_PREFIX                      -framework<br>FRAMEWORK_SEARCH_PATHS                     <span class="hljs-comment">&quot;\&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos\&quot; &quot;</span><br>FRAMEWORK_VERSION                          A<br>FULL_PRODUCT_NAME                          project.app<br>GCC3_VERSION                               <span class="hljs-number">3.3</span><br>GCC_C_LANGUAGE_STANDARD                    gnu99<br>GCC_INLINES_ARE_PRIVATE_EXTERN             <span class="hljs-keyword">YES</span><br>GCC_PFE_FILE_C_DIALECTS                    <span class="hljs-comment">&quot;c objective-c c++ objective-c++&quot;</span><br>GCC_PRECOMPILE_PREFIX_HEADER               <span class="hljs-keyword">YES</span><br>GCC_PREFIX_HEADER                          project/<span class="hljs-comment">Prefix.pch</span><br>GCC_PREPROCESSOR_DEFINITIONS               <span class="hljs-comment">&quot;NDEBUG DISTRIBUTION_BUILD=1 KK_TARGET=0x000F0&quot;</span><br>GCC_SYMBOLS_PRIVATE_EXTERN                 <span class="hljs-comment">YES</span><br>GCC_THUMB_SUPPORT                          <span class="hljs-comment">YES</span><br>GCC_TREAT_WARNINGS_AS_ERRORS               <span class="hljs-comment">NO</span><br>GCC_VERSION                                <span class="hljs-comment">com.apple.compilers.llvm.clang.1_0</span><br>GCC_VERSION_IDENTIFIER                     <span class="hljs-comment">com_apple_compilers_llvm_clang_1_0</span><br>GCC_WARN_ABOUT_RETURN_TYPE                 <span class="hljs-comment">YES</span><br>GCC_WARN_UNUSED_FUNCTION                   <span class="hljs-comment">YES</span><br>GCC_WARN_UNUSED_VARIABLE                   <span class="hljs-comment">YES</span><br>GENERATE_MASTER_OBJECT_FILE                <span class="hljs-comment">NO</span><br>GENERATE_PKGINFO_FILE                      <span class="hljs-comment">YES</span><br>GENERATE_PROFILING_CODE                    <span class="hljs-comment">NO</span><br>GID                                        <span class="hljs-comment">20</span><br>GROUP                                      <span class="hljs-comment">staff</span><br>INPUT_FILE_BASE             <span class="hljs-comment">Default</span><br>INPUT_FILE_DIR              <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1/images&quot;</span><br>INPUT_FILE_NAME             <span class="hljs-comment">Default.png</span><br>INPUT_FILE_PATH             <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1/images/Default.png&quot;</span><br>SCRIPT_INPUT_FILE           <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1/images/Default.png&quot;</span><br>SCRIPT_OUTPUT_FILE_0        <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/DerivedSources/Default.png&quot;</span><br><br>EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES              <span class="hljs-comment">&quot;*.nib *.lproj *.framework *.gch (*) CVS .svn .git *.xcodeproj *.xcode *.pbproj *.pbxproj&quot;</span><br>HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT     <span class="hljs-comment">YES</span><br>HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES <span class="hljs-comment">YES</span><br>HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS            <span class="hljs-comment">YES</span><br>HEADERMAP_INCLUDES_PROJECT_HEADERS                         <span class="hljs-comment">YES</span><br>HEADER_SEARCH_PATHS                  <span class="hljs-comment">&quot;\&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos/include\&quot; &quot;</span><br>ICONV                                /usr/<span class="hljs-comment">bin</span>/iconv<br>INFOPLIST_EXPAND_BUILD_SETTINGS      <span class="hljs-keyword">YES</span><br>INFOPLIST_FILE                       project/<span class="hljs-comment">Resources</span>/Info.plist<br>INFOPLIST_OUTPUT_FORMAT              <span class="hljs-keyword">binary</span><br>INFOPLIST_PATH                       project.app/<span class="hljs-comment">Info.plist</span><br>INFOPLIST_PREPROCESS                 <span class="hljs-comment">NO</span><br>INFOSTRINGS_PATH                     <span class="hljs-comment">project.app</span>/English.lproj/<span class="hljs-comment">InfoPlist.strings</span><br>INPUT_FILE_REGION_PATH_COMPONENT<br>INPUT_FILE_SUFFIX                    <span class="hljs-comment">.png</span><br>INSTALL_DIR                          <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/InstallationBuildProductsLocation/Applications&quot;</span><br>INSTALL_GROUP                        <span class="hljs-comment">staff</span><br>INSTALL_MODE_FLAG                    <span class="hljs-comment">u+w,go-w,a+rX</span><br>INSTALL_OWNER                        <span class="hljs-comment">username</span><br>INSTALL_PATH                         /Applications<br>INSTALL_ROOT                         <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/InstallationBuildProductsLocation&quot;</span><br>JAVAC_DEFAULT_FLAGS                  <span class="hljs-comment">&quot;-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8&quot;</span><br>JAVA_APP_STUB                        /<span class="hljs-comment">System</span>/Library/<span class="hljs-comment">Frameworks</span>/JavaVM.framework/<span class="hljs-comment">Resources</span>/MacOS/<span class="hljs-comment">JavaApplicationStub</span><br>JAVA_ARCHIVE_CLASSES                 <span class="hljs-comment">YES</span><br>JAVA_ARCHIVE_TYPE                    <span class="hljs-comment">JAR</span><br>JAVA_COMPILER                        /usr/<span class="hljs-comment">bin</span>/javac<br>JAVA_FOLDER_PATH                     project.app/<span class="hljs-comment">Java</span><br>JAVA_FRAMEWORK_RESOURCES_DIRS        <span class="hljs-comment">Resources</span><br>JAVA_JAR_FLAGS                       <span class="hljs-comment">cv</span><br>JAVA_SOURCE_SUBDIR                   <span class="hljs-comment">.</span><br>JAVA_USE_DEPENDENCIES                <span class="hljs-comment">YES</span><br>JAVA_ZIP_FLAGS                       <span class="hljs-comment">-urg</span><br>JIKES_DEFAULT_FLAGS                  <span class="hljs-comment">&quot;+E +OLDCSO&quot;</span><br>KEEP_PRIVATE_EXTERNS                 <span class="hljs-comment">NO</span><br>LD_GENERATE_MAP_FILE                 <span class="hljs-comment">NO</span><br>LD_MAP_FILE_PATH                     <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/project-LinkMap-normal-armv7.txt&quot;</span><br>LD_NO_PIE                            <span class="hljs-comment">NO</span><br>LD_OPENMP_FLAGS                      <span class="hljs-comment">-fopenmp</span><br>LEGACY_DEVELOPER_DIR                 /Developer/<span class="hljs-comment">Library</span>/Xcode/<span class="hljs-comment">PrivatePlugIns</span>/Xcode3Core.ideplugin/<span class="hljs-comment">Contents</span>/SharedSupport/<span class="hljs-comment">Developer</span><br>LEX                                  /Developer/<span class="hljs-comment">usr</span>/bin/<span class="hljs-comment">lex</span><br>LIBRARY_FLAG_NOSPACE                 <span class="hljs-comment">YES</span><br>LIBRARY_FLAG_PREFIX                  <span class="hljs-comment">-l</span><br>LIBRARY_SEARCH_PATHS                 <span class="hljs-comment">&quot;\&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos\&quot;  \&quot;/Volumes/Development/Project Game/Project-v1/FlurryLib\&quot;&quot;</span><br>LINKER_DISPLAYS_MANGLED_NAMES        <span class="hljs-comment">NO</span><br>LINK_FILE_LIST_normal_armv6          <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/Objects-normal/armv6/project.LinkFileList&quot;</span><br>LINK_FILE_LIST_normal_armv7          <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/Objects-normal/armv7/project.LinkFileList&quot;</span><br>LINK_WITH_STANDARD_LIBRARIES         <span class="hljs-comment">YES</span><br>LOCALIZED_RESOURCES_FOLDER_PATH      <span class="hljs-comment">project.app</span>/English.lproj<br>LOCAL_ADMIN_APPS_DIR                 /<span class="hljs-comment">Applications</span>/Utilities<br>LOCAL_APPS_DIR                       /<span class="hljs-comment">Applications</span><br>LOCAL_DEVELOPER_DIR                  /Library/<span class="hljs-comment">Developer</span><br>LOCAL_LIBRARY_DIR                    /Library<br>MACH_O_TYPE                          mh_execute<br>MAC_OS_X_PRODUCT_BUILD_VERSION       <span class="hljs-number">11</span>A511<br>MAC_OS_X_VERSION_ACTUAL              <span class="hljs-number">1070</span><br>MAC_OS_X_VERSION_MAJOR               <span class="hljs-number">1070</span><br>MAC_OS_X_VERSION_MINOR               <span class="hljs-number">0700</span><br>NATIVE_ARCH                          armv6<br>NATIVE_ARCH_32_BIT                   i386<br>NATIVE_ARCH_64_BIT                   x86_64<br>NATIVE_ARCH_ACTUAL                   x86_64<br>NO_COMMON                            <span class="hljs-keyword">YES</span><br>OBJECT_FILE_DIR                      <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/Objects&quot;</span><br>OBJECT_FILE_DIR_normal               <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/Objects-normal&quot;</span><br>OBJROOT                              <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath&quot;</span><br>ONLY_ACTIVE_ARCH                     <span class="hljs-keyword">NO</span><br>OPTIMIZATION_LEVEL                   <span class="hljs-number">0</span><br>OS                                   MACOS<br>OSAC                                 /<span class="hljs-comment">usr</span>/bin/<span class="hljs-comment">osacompile</span><br>OTHER_CFLAGS                         <span class="hljs-comment">-DNS_BLOCK_ASSERTIONS=1</span><br>OTHER_CPLUSPLUSFLAGS                 <span class="hljs-comment">-DNS_BLOCK_ASSERTIONS=1</span><br>OTHER_INPUT_FILE_FLAGS<br>OTHER_LDFLAGS                        <span class="hljs-comment">-lz</span><br>PACKAGE_TYPE                         <span class="hljs-comment">com.apple.package-type.wrapper.application</span><br>PASCAL_STRINGS                       <span class="hljs-comment">YES</span><br>PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES  <span class="hljs-comment">&quot;/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms&quot;</span><br>PBDEVELOPMENTPLIST_PATH              <span class="hljs-comment">project.app</span>/pbdevelopment.plist<br>PFE_FILE_C_DIALECTS                  <span class="hljs-comment">&quot;c objective-c c++ objective-c++&quot;</span><br>PKGINFO_FILE_PATH                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/PkgInfo&quot;</span><br>PKGINFO_PATH                         project.app/<span class="hljs-comment">PkgInfo</span><br>PLATFORM_DEVELOPER_APPLICATIONS_DIR  /Developer/<span class="hljs-comment">Platforms</span>/iPhoneOS.platform/<span class="hljs-comment">Developer</span>/Applications<br>PLATFORM_DEVELOPER_BIN_DIR           /<span class="hljs-comment">Developer</span>/Platforms/<span class="hljs-comment">iPhoneOS.platform</span>/Developer/<span class="hljs-comment">usr</span>/bin<br>PLATFORM_DEVELOPER_LIBRARY_DIR       /<span class="hljs-comment">Developer</span>/Library/<span class="hljs-comment">Xcode</span>/PrivatePlugIns/<span class="hljs-comment">Xcode3Core.ideplugin</span>/Contents/<span class="hljs-comment">SharedSupport</span>/Developer/<span class="hljs-comment">Library</span><br>PLATFORM_DEVELOPER_SDK_DIR           /Developer/<span class="hljs-comment">Platforms</span>/iPhoneOS.platform/<span class="hljs-comment">Developer</span>/SDKs<br>PLATFORM_DEVELOPER_TOOLS_DIR         /<span class="hljs-comment">Developer</span>/Platforms/<span class="hljs-comment">iPhoneOS.platform</span>/Developer/<span class="hljs-comment">Tools</span><br>PLATFORM_DEVELOPER_USR_DIR           /Developer/<span class="hljs-comment">Platforms</span>/iPhoneOS.platform/<span class="hljs-comment">Developer</span>/usr<br>PLATFORM_DIR                         /<span class="hljs-comment">Developer</span>/Platforms/<span class="hljs-comment">iPhoneOS.platform</span><br>PLATFORM_NAME                        <span class="hljs-comment">iphoneos</span><br>PLATFORM_PREFERRED_ARCH              <span class="hljs-comment">i386</span><br>PLATFORM_PRODUCT_BUILD_VERSION       <span class="hljs-comment">8H7</span><br>PLIST_FILE_OUTPUT_FORMAT             <span class="hljs-comment">binary</span><br>PLUGINS_FOLDER_PATH                  <span class="hljs-comment">project.app</span>/PlugIns<br>PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR                    <span class="hljs-keyword">YES</span><br>PRECOMP_DESTINATION_DIR              <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/PrefixHeaders&quot;</span><br>PRESERVE_DEAD_CODE_INITS_AND_TERMS   <span class="hljs-keyword">NO</span><br>PRIVATE_HEADERS_FOLDER_PATH          project.app/<span class="hljs-comment">PrivateHeaders</span><br>PRODUCT_NAME                         <span class="hljs-comment">project</span><br>PRODUCT_SETTINGS_PATH                <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1/project/Resources/Info.plist&quot;</span><br>PRODUCT_TYPE                         <span class="hljs-comment">com.apple.product-type.application</span><br>PROFILING_CODE                       <span class="hljs-comment">NO</span><br>PROJECT                              <span class="hljs-comment">project</span><br>PROJECT_DERIVED_FILE_DIR             <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/DerivedSources&quot;</span><br>PROJECT_DIR                          <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1&quot;</span><br>PROJECT_FILE_PATH                    <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1/project.xcodeproj&quot;</span><br>PROJECT_NAME                         <span class="hljs-comment">project</span><br>PROJECT_TEMP_DIR                     <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build&quot;</span><br>PROVISIONING_PROFILE_REQUIRED        <span class="hljs-comment">YES</span><br>PUBLIC_HEADERS_FOLDER_PATH           <span class="hljs-comment">project.app</span>/Headers<br>RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS   <span class="hljs-keyword">YES</span><br>REMOVE_CVS_FROM_RESOURCES            <span class="hljs-keyword">YES</span><br>REMOVE_GIT_FROM_RESOURCES            <span class="hljs-keyword">YES</span><br>REMOVE_SVN_FROM_RESOURCES            <span class="hljs-keyword">YES</span><br>RESOURCE_RULES_REQUIRED              <span class="hljs-keyword">YES</span><br>REZ_COLLECTOR_DIR                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/ResourceManagerResources&quot;</span><br>REZ_OBJECTS_DIR                      <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/ResourceManagerResources/Objects&quot;</span><br>REZ_SEARCH_PATHS                     <span class="hljs-comment">&quot;\&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos\&quot; &quot;</span><br>RUN_CLANG_STATIC_ANALYZER            <span class="hljs-keyword">NO</span><br>SCAN_ALL_SOURCE_FILES_FOR_INCLUDES   <span class="hljs-keyword">NO</span><br>SCRIPTS_FOLDER_PATH                  project.app/<span class="hljs-comment">Scripts</span><br>SCRIPT_INPUT_FILE                    <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1/fonts/helvetica-black-hd.png&quot;</span><br>SCRIPT_OUTPUT_FILE_0                 <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build/DerivedSources/helvetica-black-hd.png&quot;</span><br>SCRIPT_OUTPUT_FILE_COUNT             <span class="hljs-comment">1</span><br>SDKROOT                              /Developer/<span class="hljs-comment">Platforms</span>/iPhoneOS.platform/<span class="hljs-comment">Developer</span>/SDKs/<span class="hljs-comment">iPhoneOS4.3.sdk</span><br>SDK_DIR                              /Developer/<span class="hljs-comment">Platforms</span>/iPhoneOS.platform/<span class="hljs-comment">Developer</span>/SDKs/<span class="hljs-comment">iPhoneOS4.3.sdk</span><br>SDK_NAME                             <span class="hljs-comment">iphoneos4.3</span><br>SDK_PRODUCT_BUILD_VERSION            <span class="hljs-comment">8H7</span><br>SED                                  /usr/<span class="hljs-comment">bin</span>/sed<br>SEPARATE_STRIP                       <span class="hljs-keyword">NO</span><br>SEPARATE_SYMBOL_EDIT                 <span class="hljs-keyword">NO</span><br>SET_DIR_MODE_OWNER_GROUP            <span class="hljs-keyword">YES</span><br>SET_FILE_MODE_OWNER_GROUP           <span class="hljs-keyword">NO</span><br>SHALLOW_BUNDLE                      <span class="hljs-keyword">YES</span><br>SHARED_DERIVED_FILE_DIR             <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath/Distribution-iphoneos/DerivedSources&quot;</span><br>SHARED_FRAMEWORKS_FOLDER_PATH       project.app/<span class="hljs-comment">SharedFrameworks</span><br>SHARED_PRECOMPS_DIR                 /Users/<span class="hljs-comment">username</span>/Library/<span class="hljs-comment">Developer</span>/Xcode/<span class="hljs-comment">DerivedData</span>/project-dxdgjvgsvvbhowgjqouevhmvgxgf/<span class="hljs-comment">Build</span>/PrecompiledHeaders<br>SHARED_SUPPORT_FOLDER_PATH          project.app/<span class="hljs-comment">SharedSupport</span><br>SKIP_INSTALL                        <span class="hljs-comment">NO</span><br>SOURCE_ROOT                         <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1&quot;</span><br>SRCROOT                             <span class="hljs-comment">&quot;/Volumes/Development/Project Game/Project-v1&quot;</span><br>STRINGS_FILE_OUTPUT_ENCODING        <span class="hljs-comment">binary</span><br>STRIP_INSTALLED_PRODUCT             <span class="hljs-comment">YES</span><br>STRIP_STYLE                         <span class="hljs-comment">all</span><br>SUPPORTED_DEVICE_FAMILIES           <span class="hljs-comment">1,2</span><br>SUPPORTED_PLATFORMS                 <span class="hljs-comment">&quot;iphonesimulator iphoneos&quot;</span><br>SYMROOT                             <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/BuildProductsPath&quot;</span><br>SYSTEM_ADMIN_APPS_DIR               /Applications/<span class="hljs-comment">Utilities</span><br>SYSTEM_APPS_DIR                     /Applications<br>SYSTEM_CORE_SERVICES_DIR            /<span class="hljs-comment">System</span>/Library/<span class="hljs-comment">CoreServices</span><br>SYSTEM_DEMOS_DIR                    /Applications/<span class="hljs-comment">Extras</span><br>SYSTEM_DEVELOPER_APPS_DIR           /Developer/<span class="hljs-comment">Applications</span><br>SYSTEM_DEVELOPER_BIN_DIR            /Developer/<span class="hljs-comment">usr</span>/bin<br>SYSTEM_DEVELOPER_DEMOS_DIR          <span class="hljs-comment">&quot;/Developer/Applications/Utilities/Built Examples&quot;</span><br>SYSTEM_DEVELOPER_DIR                /<span class="hljs-comment">Developer</span><br>SYSTEM_DEVELOPER_DOC_DIR            <span class="hljs-comment">&quot;/Developer/ADC Reference Library&quot;</span><br>SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR <span class="hljs-comment">&quot;/Developer/Applications/Graphics Tools&quot;</span><br>SYSTEM_DEVELOPER_JAVA_TOOLS_DIR     <span class="hljs-comment">&quot;/Developer/Applications/Java Tools&quot;</span><br>SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR   <span class="hljs-comment">&quot;/Developer/Applications/Performance Tools&quot;</span><br>SYSTEM_DEVELOPER_RELEASENOTES_DIR   <span class="hljs-comment">&quot;/Developer/ADC Reference Library/releasenotes&quot;</span><br>SYSTEM_DEVELOPER_TOOLS              /Developer/<span class="hljs-comment">Tools</span><br>SYSTEM_DEVELOPER_TOOLS_DOC_DIR      <span class="hljs-comment">&quot;/Developer/ADC Reference Library/documentation/DeveloperTools&quot;</span><br>SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR   <span class="hljs-comment">&quot;/Developer/ADC Reference Library/releasenotes/DeveloperTools&quot;</span><br>SYSTEM_DEVELOPER_USR_DIR            /Developer/<span class="hljs-comment">usr</span><br>SYSTEM_DEVELOPER_UTILITIES_DIR      /Developer/<span class="hljs-comment">Applications</span>/Utilities<br>SYSTEM_DOCUMENTATION_DIR            /<span class="hljs-comment">Library</span>/Documentation<br>SYSTEM_LIBRARY_DIR                  /<span class="hljs-comment">System</span>/Library<br>TARGETED_DEVICE_FAMILY              <span class="hljs-number">1</span><br>TARGETNAME                          Project<br>TARGET_BUILD_DIR                    <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/InstallationBuildProductsLocation/Applications&quot;</span><br>TARGET_NAME                         Project<br>TARGET_TEMP_DIR                     <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build&quot;</span><br>TEMP_DIR                            <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build&quot;</span><br>TEMP_FILES_DIR                      <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build&quot;</span><br>TEMP_FILE_DIR                       <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath/project.build/Distribution-iphoneos/Project.build&quot;</span><br>TEMP_ROOT                           <span class="hljs-comment">&quot;/Users/username/Library/Developer/Xcode/DerivedData/project-dxdgjvgsvvbhowgjqouevhmvgxgf/ArchiveIntermediates/Project Distribution/IntermediateBuildFilesPath&quot;</span><br>TEST_AFTER_BUILD                    <span class="hljs-keyword">NO</span><br>UID                                 <span class="hljs-number">501</span><br>UNLOCALIZED_RESOURCES_FOLDER_PATH   project.app    UNSTRIPPED_PRODUCT           <span class="hljs-keyword">NO</span><br>USER                         username<br>USER_APPS_DIR                /<span class="hljs-comment">Users</span>/username/<span class="hljs-comment">Applications</span><br>USER_HEADER_SEARCH_PATHS     <span class="hljs-comment">project</span>/libs<br>USER_LIBRARY_DIR             /<span class="hljs-comment">Users</span>/username/<span class="hljs-comment">Library</span><br>USE_DYNAMIC_NO_PIC           <span class="hljs-comment">YES</span><br>USE_HEADERMAP                <span class="hljs-comment">YES</span><br>USE_HEADER_SYMLINKS          <span class="hljs-comment">NO</span><br>VALIDATE_PRODUCT             <span class="hljs-comment">YES</span><br>VALID_ARCHS                  <span class="hljs-comment">&quot;armv6 armv7&quot;</span><br>VERBOSE_PBXCP                <span class="hljs-comment">NO</span><br>VERSIONPLIST_PATH            <span class="hljs-comment">project.app</span>/version.plist<br>VERSION_INFO_BUILDER         username<br>VERSION_INFO_FILE            project_vers.c<br>VERSION_INFO_STRING          <span class="hljs-comment">&quot;\&quot;@(#)PROGRAM:project  PROJECT:project-\&quot;&quot;</span><br>WRAPPER_EXTENSION            app<br>WRAPPER_NAME                 project.app<br>WRAPPER_SUFFIX               .app<br>XCODE_APP_SUPPORT_DIR        /<span class="hljs-comment">Developer</span>/Library/<span class="hljs-comment">Xcode</span><br>XCODE_PRODUCT_BUILD_VERSION  <span class="hljs-comment">4B110</span><br>XCODE_VERSION_ACTUAL         <span class="hljs-comment">0410</span><br>XCODE_VERSION_MAJOR          <span class="hljs-comment">0400</span><br>XCODE_VERSION_MINOR          <span class="hljs-comment">0410</span><br>YACC                        /Developer/<span class="hljs-comment">usr</span>/bin/<span class="hljs-comment">yacc</span><br><br></code></pre></td></tr></table></figure>
+
+
+<p>Link:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/6910901/how-do-i-print-a-list-of-build-settings-in-xcode-project">stackoverflow</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ios_build_settings_varibles</div>
+      <div>http://example.com/2023/03/22/ios_build_settings_varibles/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/ios/" title="ios">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ios</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/ios_oc/" title="ios_oc">
+                        <span class="hidden-mobile">ios_oc</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

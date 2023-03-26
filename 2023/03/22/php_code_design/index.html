@@ -1,0 +1,723 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="php 结构设计 通过对于MVC设计思想进行的拆解封装，来实现清晰，有效，一致性的程序设计思想。 一个程序从逻辑结构上可看做是模型(Model),视图(View)和控制Controller)三个逻辑块。 在JAVA中Model层实现系统中的业务逻辑，通常可以用JavaBean或EJB来实现。 View层用于与用户的交互，通常用JSP来实现。Controller层是Model与View之间沟通的桥梁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php_code_design">
+<meta property="og:url" content="http://example.com/2023/03/22/php_code_design/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="php 结构设计 通过对于MVC设计思想进行的拆解封装，来实现清晰，有效，一致性的程序设计思想。 一个程序从逻辑结构上可看做是模型(Model),视图(View)和控制Controller)三个逻辑块。 在JAVA中Model层实现系统中的业务逻辑，通常可以用JavaBean或EJB来实现。 View层用于与用户的交互，通常用JSP来实现。Controller层是Model与View之间沟通的桥梁">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.779Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>php_code_design - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="php_code_design"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          85 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">php_code_design</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="php-结构设计"><a href="#php-结构设计" class="headerlink" title="php 结构设计"></a>php 结构设计</h1><p> <strong>通过对于MVC设计思想进行的拆解封装，来实现清晰，有效，一致性的程序设计思想。</strong></p>
+<p>一个程序从逻辑结构上可看做是模型(Model),视图(View)和控制Controller)三个逻辑块。</p>
+<p>在JAVA中Model层实现系统中的业务逻辑，通常可以用JavaBean或EJB来实现。 View层用于与用户的交互，通常用JSP来实现。Controller层是Model与View之间沟通的桥梁，通常是router servlet向应用端的扩展。<br>可 PHP 没有这样清晰的划分，所以需要将设计思想揉入到程序代码中去。</p>
+<h1 id="1-程序代码类封装"><a href="#1-程序代码类封装" class="headerlink" title="1. 程序代码类封装"></a>1. 程序代码类封装</h1><blockquote>
+<p>对于一个应用需求（ex: similar相似商品页)，将需求先分为3个文件：similar.controller.php;similar.model.php.similar.view.php<br>通过名字我们也可以看出各文件中的代码用途，剩下就是要给各个文件中的类进行命名。<br>因为是这对一个应用的不同操作类，所以需要给各个类加不同的类目后缀，</p>
+</blockquote>
+<p>例如similar.controller.php</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>controller 控制程序类  完成此类中的方法是程序各页面流程，每一个方法对应一个同步请求页面（以配合页面的调用规则）<br>class similar&#123;<br><span class="hljs-regexp">//</span>相似商品页的展现<br>functio do_opensearch(<span class="hljs-variable">$_param</span>)&#123;<br><span class="hljs-regexp">//</span>请求参数过滤<br><span class="hljs-regexp">//</span>请求商品数据<br><span class="hljs-regexp">//</span>根据呈现规则处理商品数据<br><span class="hljs-regexp">//</span>渲染商品数据获取呈现html<br><span class="hljs-regexp">//</span>展示呈现html<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>对应的请求就是</p>
+<p><a target="_blank" rel="noopener" href="http://s.xxx.com/similar/opensearch/">http://s.xxx.com/similar/opensearch/</a></p>
+<p>similar.model.php</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">//model 数据操作程序类  完成对此应用的数据请求封装，返回结果的结构解析处理</span><br><span class="hljs-keyword">class</span> <span class="hljs-symbol">similarMODEL</span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>similar.view.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//model 呈现操作程序类  完成对此应用的数据呈现封装，返回给已经处理好的</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">similarVIEW</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">view_getDetail</span>(<span class="hljs-params"><span class="hljs-variable">$_goodDataArr</span></span>)</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable">$html</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="2-类调用"><a href="#2-类调用" class="headerlink" title="2. 类调用"></a>2. 类调用</h1><p>我们很清晰的将各个逻辑将不同代码封装在了不同文件和类中了。如何灵活的调用呢？PHP是一个解释语言，没有像JAVA和C一个的编译过程，无法享受编译语言，在预编译过程中的自动连接功能。<br>其实现在PHP解释器也已经意识到这个问题，并在5.3.1以后提出了autoload方法来解决，当解释器遇到一个非声明类或者函数时会自动运行autoload去再加载一次，如果还没有才报错。<br>详情参见 <a target="_blank" rel="noopener" href="http://php.net/manual/en/language.oop5.autoload.php">http://php.net/manual/en/language.oop5.autoload.php</a></p>
+<p>但这样还是一个被动解决方案。下面提供一个主动动态加载方案。加入资源系统调动类<br>在讲解这个类的使用之前先看一下我们之前加载并使用一个类文件的过程：<br>文件:similar.controller.php</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lasso">require_once PATH.<span class="hljs-string">&quot;similar.model.php&quot;</span>;<br>$sModelObj = <span class="hljs-literal">new</span> similarMODEL;<br>$goodsData = $sModelObj-&gt;getGoodsInfoByNid($nid);<span class="hljs-string">``</span><span class="hljs-string">`</span><br><span class="hljs-string"></span><br><span class="hljs-string">这是在过程中调用，如果在controller类内调用的话就需要写成这样，</span><br></code></pre></td></tr></table></figure>
+<p>require_once PATH.”similar.model.php”;<br>class similar{<br>public $_modelObj;<br>function __construct(){<br>$this-&gt;_modelObj &#x3D; new similarMODEL;<br>}<br>&#x2F;&#x2F;相似商品页的展现<br>functio do_opensearch($_param){<br>&#x2F;&#x2F;请求商品数据<br>$goodsInfoArr &#x3D; $this-&gt;_modelObj-&gt;getGoodsInfoByNid($nid);<br>}<br>}&#x2F;&#x2F;end class&#96;&#96;&#96;</p>
+<p>如果controller类需要使用另一个MODEL，例如forest,ha3什么的就要声明多个类内元素变量。如果利用PHP 的变量传导特性，建立一个资源调度类，来统一加载和调度需要的类并声明，使用起来就会方便很多。下面我们来详细的分解下这个资源调度类的设计，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 加载指定类型的类程序</span><br><span class="hljs-comment">**/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Box</span> </span>&#123;<br><span class="hljs-comment">//声明一个进程内资源对象池</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-variable">$_modelObjArr</span>;<br><span class="hljs-comment">//获取一个资源对象</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getObj</span>(<span class="hljs-params"><span class="hljs-variable">$_appName</span>,<span class="hljs-variable">$_typeStr</span>=<span class="hljs-string">&#x27;class&#x27;</span></span>) </span>&#123;<br><br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_typeStr</span>==<span class="hljs-string">&#x27;class&#x27;</span>)&#123;<br><span class="hljs-variable">$className</span> = <span class="hljs-variable">$_appName</span>;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br><span class="hljs-variable">$className</span> = <span class="hljs-variable">$_appName</span>.<span class="hljs-title function_ invoke__">strtoupper</span>(<span class="hljs-variable">$_typeStr</span>);<br>&#125;<br><span class="hljs-comment">//资源对象已创建 直接返回使用</span><br><span class="hljs-keyword">if</span>( <span class="hljs-keyword">isset</span>(<span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$className</span>]) &amp;&amp; <span class="hljs-title function_ invoke__">is_object</span>(<span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$className</span>]) )&#123;<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$className</span>;<br>&#125;<br><span class="hljs-comment">//加载文件资源类文件</span><br><span class="hljs-variable">$file</span> = <span class="hljs-title function_ invoke__">dirname</span>(<span class="hljs-keyword">__FILE__</span>).<span class="hljs-string">&quot;<span class="hljs-subst">&#123;$_appName&#125;</span>/<span class="hljs-subst">&#123;$_appName&#125;</span>.<span class="hljs-subst">&#123;$_typeStr&#125;</span>.php&quot;</span>;<br><span class="hljs-keyword">if</span>( <span class="hljs-title function_ invoke__">file_exists</span>(<span class="hljs-variable">$file</span>) )&#123;<br><span class="hljs-keyword">require_once</span> <span class="hljs-variable">$file</span>;<br><span class="hljs-keyword">if</span>( <span class="hljs-title function_ invoke__">class_exists</span>(<span class="hljs-variable">$className</span>) )&#123;<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>::<span class="hljs-title function_ invoke__">_createObj</span>(<span class="hljs-variable">$className</span>);<br>&#125;<span class="hljs-keyword">else</span>&#123;<br><span class="hljs-variable">$errStr</span> =  <span class="hljs-string">&quot;no class <span class="hljs-subst">&#123;$className&#125;</span> in file <span class="hljs-subst">&#123;$file&#125;</span>&quot;</span>; <span class="hljs-comment">//类名错误</span><br>&#125;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-variable">$errStr</span> = <span class="hljs-string">&quot;no class file <span class="hljs-subst">&#123;$file&#125;</span>&quot;</span>; <span class="hljs-comment">//类文件错误</span><br>&#125;<br><span class="hljs-built_in">self</span>::<span class="hljs-title function_ invoke__">_showErr</span>(<span class="hljs-variable">$errStr</span>);<br>&#125;<br><span class="hljs-comment">//创建资源对象</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createObj</span>(<span class="hljs-params"><span class="hljs-variable">$_className</span></span>)</span>&#123;<br><span class="hljs-keyword">if</span>( <span class="hljs-keyword">isset</span>(<span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$_className</span>]) &amp;&amp; <span class="hljs-title function_ invoke__">is_object</span>(<span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$_className</span>]) )&#123;<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$_className</span>];<br>&#125;<span class="hljs-keyword">else</span>&#123;<br><span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$_className</span>] = <span class="hljs-keyword">new</span> <span class="hljs-variable">$_className</span>();<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>::<span class="hljs-variable">$_modelObjArr</span>[<span class="hljs-variable">$_className</span>];<br>&#125;<br>&#125;<br><span class="hljs-comment">//错误提示</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_showErr</span>(<span class="hljs-params"><span class="hljs-variable">$_errTypeStr</span>=<span class="hljs-string">&#x27;&#x27;</span></span>)</span>&#123;<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$_errTypeStr</span>;  <span class="hljs-keyword">exit</span>;<br><span class="hljs-comment">//errorlog($_errTypeStr);</span><br>&#125;<br>&#125;<span class="hljs-comment">//end class```</span><br><br>改用Box资源调度类，加载类程序<br>文件:similar.controller.php<br></code></pre></td></tr></table></figure>
+<p>class similar{</p>
+<p>function __construct(){<br>}<br>&#x2F;&#x2F;相似商品页的展现<br>functio do_opensearch($_param){<br>&#x2F;&#x2F;请求商品数据<br>$goodsInfoArr &#x3D; Box::getObj(‘similar’,’model’)-&gt;getGoodsInfoByNid($nid);<br>$html &#x3D; Box::getObj(‘similar’,’view’)-&gt;view_getDetail($goodsInfoArr);<br>&#x2F;&#x2F;其他已封装好的数据逻辑<br>$hotHtml &#x3D; $this-&gt;_getHotHtml();<br>}<br>function do_search($_param){<br>$goodsInfoArr &#x3D; Box::getObj(‘similar’,’model’)-&gt;getGoodsInfoByNid($nid);<br>$html &#x3D; Box::getObj(‘similar’,’view’)-&gt;view_getDetail($goodsInfoArr);<br>}<br>function _getHotHtml(){<br>$hotInfoArr &#x3D; Box::getObj(‘similar’,’model’)-&gt;getGoodsInfoByNid($nid);<br>$html &#x3D; Box::getObj(‘similar’,’view’)-&gt;view_getDetail($goodsInfoArr);<br>return $hotInfoArr;<br>}<br>}&#x2F;&#x2F;end class&#96;&#96;&#96;</p>
+<p>这样在一个响应进程内 “similar.model.php”; 文件只会被加载一次，similarMODEL 也只会被创建一次，<br>随使随调用。不用提前声明，不用考虑重复加载，重复创建。</p>
+<p>Box解决了类与类间资源的调用和创建。</p>
+<p>那如何让一个controller类文件中的function 运行呢？我们需要一个请求调度类 Bin。</p>
+<p>之前我们的请求响应都市通过websearch的io model来完成。吧请求的path映射到实际文件中。<br>例如:<br>xxxx.xxx.com&#x2F;similar&#x2F;opensearch&#x2F;index.php 或者是 xxx.xxx.com&#x2F;similar&#x2F;opensearch.php 这样的文件,websearch将host替换成实际文件系统的path。</p>
+<p>这样外部程序可以各种扫描我们的目录，一旦疏忽就会把一些常用方法暴露出来，ex:xxxx.xxx.com&#x2F;tools&#x2F;info.php 什么的，有风险隐患。</p>
+<p>当然加一些过滤条件是可以屏蔽这样的问题，但会增减webserver的逻辑，一旦有改动就会改动webserver的conf。麻烦。索性我们就webserver踏踏实实的做好io和http打包解包，</p>
+<p>让app server来过滤和灵活配置请求调用。再webserver中将所有的访问都映射(rewitre)到host&#x2F;dispatch.php，由Bin类来实现调度和分配。实现应用逻辑单一入口调用结构。</p>
+<p>dispatch.php完成一个平台分配，性能监控，配置加载，应用启动，分类型输入(同步，异步，PC，mobile)，等平台级功能。</p>
+<p>Bin类就需要如下功能: 解析请求，将webserver传递的环境变量传递到响应的实际处理应用来完成分解，提出similar 应用名称，opensearch 方法名称，</p>
+<p>还有GET,POST请求参数，组装成请求参数数组，</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">$<span class="hljs-keyword">this</span>-&gt;_paramArr = explode( <span class="hljs-string">&#x27;/&#x27;</span>, trim(strtok( urldecode($_SERVER[<span class="hljs-string">&quot;REQUEST_URI&quot;</span>]),<span class="hljs-string">&#x27;?&#x27;</span>),<span class="hljs-string">&#x27;/&#x27;</span>));<br>$<span class="hljs-keyword">this</span>-&gt;_paramArr = array_merge($<span class="hljs-keyword">this</span>-&gt;_paramArr,$_GET);<br>这样$<span class="hljs-keyword">this</span>-&gt;_paramArr[<span class="hljs-number">0</span>]就是appname应用名称<br>这样$<span class="hljs-keyword">this</span>-&gt;_paramArr[<span class="hljs-number">1</span>]就是function方法名称<br></code></pre></td></tr></table></figure>
+
+<p>平台流程就可以装载appname.class.php 文件并执行 appname-&gt;do_function($this-&gt;_paramArr);方法。<br>这样也支持&#x2F;similar&#x2F;opensearch&#x2F;sort&#x2F;这样的传参,sort是$this-&gt;_paramArr[2]的一个参数</p>
+<p>如果$this-&gt;_paramArr[0]等于ajax也就是对于的这是一个js发起的异步请求，</p>
+<p>要装载的就是appname.ajax.php,并执行appnameAJAX-&gt;ajax_function();</p>
+<p>将同步和异步请求分文件。减少加载大文件对内存的占用。</p>
+<p>同时也可以将可访问目录跟应用目录物理上分类，让扫描程序无用。</p>
+<p>例如:</p>
+<p>&#x2F;home&#x2F;website&#x2F;host&#x2F; 这个目录只放index.php一个文件，和css,js,images一些没有加入cdn的呈现渲染文件。将webserver的docmentroot 或者laction 设置在这个目录<br>&#x2F;home&#x2F;website&#x2F;app&#x2F; 这个目录来存放编写的类程序文件，配置，由&#x2F;host&#x2F;index.php程序加载app目录下的类程序文件</p>
+<p>一个应用好办，一堆应用我们怎么办呢？下面我们来说说多应用的目录结构。</p>
+<h1 id="3-目录结构"><a href="#3-目录结构" class="headerlink" title="3.目录结构"></a>3.目录结构</h1><p>PHP的设计理念这是少又少，连个包的概念都没有。只好我们自己用目录来包装包概念。从访问结构，开发结构，部署结构上来分别介绍目录结构的作用.</p>
+<p>将访问目录host,和应用程序目录app可以看成是一个website，这个site下面的应用可以这样的</p>
+<h3 id="3-1-访问结构"><a href="#3-1-访问结构" class="headerlink" title="3.1 访问结构"></a>3.1 访问结构</h3><p>可以这样建立</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/website/</span>host<br><br><span class="hljs-regexp">/website/</span>app/similaer<br><br><span class="hljs-regexp">/website/</span>app/cmp<br><br><span class="hljs-regexp">/website/</span>app/srp<br><br><span class="hljs-regexp">/website/</span>app/…..<br></code></pre></td></tr></table></figure>
+<p>假如管理工具也可以再website下同另起一个目录</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/website/</span>admin/firebox<br><br><span class="hljs-regexp">/website/</span>admin/seoAny<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>这样，所有的请求都会到&#x2F;website&#x2F;host&#x2F;index.php由index.php在根据请求规则，加载响应的逻辑程序。</p>
+</blockquote>
+<blockquote>
+<p>跟&#x2F;webiste&#x2F;host并行的有一个system目录,&#x2F;website&#x2F;system&#x2F;,将box.class.php,bin.class.php,base.class.php等平台文件存放其中。<br>一个响应的执行流程就是</p>
+</blockquote>
+<blockquote>
+<p>webserver query -&gt;[ &#x2F;website&#x2F;host&#x2F;index.php include &#x2F;website&#x2F;system&#x2F;box,bin,base （应用架构）] 平台-&gt; [ &#x2F;website&#x2F;app&#x2F; (应用流程) | &#x2F;website&#x2F;admin&#x2F;]页面</p>
+</blockquote>
+<h3 id="3-2-开发结构"><a href="#3-2-开发结构" class="headerlink" title="3.2 开发结构"></a>3.2 开发结构</h3><p>在开发和维护过程中，会有一些同样地php库文件，如curl通信,xml解析,log,timer,template(appview),等自己开发的类程序，也有像smarty,big2gb等第三方类库。<br>各个项目都通用，比价，主搜，我的一淘，那就可以统一建立一个PHPLIBS目录与website平级</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/website/</span>host/<br><br><span class="hljs-regexp">/website/</span>app/<br><br><span class="hljs-regexp">/website/</span>system/<br><br><span class="hljs-regexp">/PHPlibs/</span>etao/ 自己的类库<br><br><span class="hljs-regexp">/PHPlibs/</span>other/ 第三方类库<br></code></pre></td></tr></table></figure>
+<p>每一个website一个svn<br>PHPlibs&#x2F;独立一个svn 专人维护，多快好省精深专</p>
+<p>将template文件从website&#x2F;中分离出来建立一个<br>webtemplate&#x2F;目录 跟ued同学共享一个svn, 让ued同学按前段template类的规则书写模板文件。按应用分目录存储。<br>如:</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs stata">webtemplate/srp<br>webtemplate/cmp<br>webtemplate/opensearch<br>webtemplate/frame 统一呈现模板，页头尾<br>webtemplate/…..<br>website/<span class="hljs-keyword">app</span>中的程序通过template类方法来调用以上模板文件。```<br><br>同时在开发和维护过程中也会遇到需要<span class="hljs-keyword">shell</span>来执行的php script ，如定时生成公共页头尾，定时取mysql库中的epid数据等。或者临时做一个算法的程序。<br><br><span class="hljs-comment">**那我们就可以在**</span><br><br>/website/<span class="hljs-keyword">app</span>/的相关应用中加入<span class="hljs-keyword">app</span>.<span class="hljs-keyword">sh</span>.php程序文件，<br>如<br>/website/<span class="hljs-keyword">app</span>/similar/similar.<span class="hljs-keyword">sh</span>.php 这个文件的类程序similarSH是通过<br>/website/script/<span class="hljs-keyword">run</span>.php 来执行的。<br><br>script/<span class="hljs-keyword">run</span>.php是一个<span class="hljs-keyword">shell</span>端的控制器响应<span class="hljs-keyword">CLI</span>请求，host/index.php是一个web端的控制器响应CGI请求<br>还可以在script/<span class="hljs-keyword">run</span>.php 外包装一个debug.bat的文件，可已经在dos,或者包装一个debug.<span class="hljs-keyword">sh</span> 程序再<span class="hljs-keyword">shell</span>下直接交互调试。<br><br><span class="hljs-comment">**具体参考代码**</span><br><br>还有一些程序处理文件，如由vm文件转换成的php模板的公共页头尾文件，会有一个跟website平行的webdata文件，<br></code></pre></td></tr></table></figure>
+<p>&#x2F;website&#x2F;….<br>&#x2F;webdata&#x2F;pageframe等目录中，在app中直接调用</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br><br>### <span class="hljs-number">3.3</span> 部署结构<br><br>通过上线脚本分别checkout<br><br></code></pre></td></tr></table></figure>
+<p>&#x2F;website&#x2F;<br>&#x2F;PHPlibs&#x2F;<br>&#x2F;webtemplate&#x2F; svn资源库</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>然后打包rpm，推送上线。<br><br>单独上线，也是使用上线脚本配置检查出相应文件，推送到前段生产机。<br><br># <span class="hljs-number">4.</span> 代码规范<br><br>关于代码格式规范，看之前大家也都积极的讨论了很久了。<br><br>代码格式规范，我们在IDE中配置一下，自动使用，并通过不断的review和提醒中培养好的书写易读代码的习惯就好了。<br><br>代码设计规范，是需要根据架构指定，并坚持执行的。<br><br>下面谈到代码设计都是基于刚刚谈到的，资源调用，请求分配来制定的。<br><br>### <span class="hljs-number">4.1</span> 关于目录<br></code></pre></td></tr></table></figure>
+<p>&#x2F;&#x2F;应用程序<br>&#x2F;website&#x2F;app&#x2F;….<br>&#x2F;&#x2F;对外访问目录<br>&#x2F;website&#x2F;host&#x2F;index.php<br>&#x2F;website&#x2F;host&#x2F;css<br>&#x2F;website&#x2F;host&#x2F;js<br>&#x2F;website&#x2F;host&#x2F;images<br>&#x2F;&#x2F;平台系统文件<br>&#x2F;website&#x2F;host&#x2F;images<br>&#x2F;&#x2F;调试，维护脚本<br>&#x2F;website&#x2F;script&#x2F;<br>&#x2F;&#x2F;模板库 对应&#x2F;website&#x2F;app&#x2F;下的目录<br>&#x2F;webtemplate&#x2F;….<br>&#x2F;&#x2F;程序类库<br>&#x2F;PHPlibs&#x2F;<br>&#x2F;&#x2F;数据文件目录<br>&#x2F;webdata</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean">没什么好说的，大家体会。<br><br>### <span class="hljs-number">4.2</span> 关于文件<br><br>文件的命名规范主要是指定内部调用，和请求调用<br></code></pre></td></tr></table></figure>
+<p>website&#x2F;app&#x2F;appname&#x2F;appname.apptype.php<br>apptype: class,model,view,ajax,api,sh ,….<br>调用:<br>Box::getObj(appname,apptype)-&gt;function();</p>
+<p>appname.class.php文件为controller文件，类中的方法做同步请求响应。<br>appname.ajax.php文件也是controller文件，类中的方法做异步请求响应。<br>appname.sh.php文件也是controller文件，类中的方法做CLI响应。<br>appname.api.php文件可以看成是controller文件，类中的方法是对一个公共，或通用逻辑的封装，如获取图片完整路径。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs scss"><br>### <span class="hljs-number">4.3</span> 关于类和方法<br>类命名：<br>&gt; 除class文件中的直接以appname命名，其他的类文件都是appname+APPTYPE命名，APPTYPE需要大写。好做语法区分。<br><br>方法命名：<br>&gt; 在方法声明中加前缀,说明方法的作用，如view类中的方法加<span class="hljs-built_in">html_getSimilarList</span>(), model方法中加入<span class="hljs-built_in">db_getData</span>()从数据库取，<span class="hljs-built_in">file_getData</span>()从文件取,<span class="hljs-built_in">url_getData</span>()从引擎或者远端取<br><br>### <span class="hljs-number">4.4</span> 关于变量和注释<br>类内变量, 参数入口变量 加_前缀, 跟过程中使用的局部变量，加以区分，增加可读性。<br><br></code></pre></td></tr></table></figure>
+<p>class similar{<br>public $_obj;<br>function do_getpage($_param){<br>}<br>}</p>
+<p>文件注释 &#x3D; 类注释<br>在文件开头加入，说明这个类的功能：<br>&#x2F;**</p>
+<ul>
+<li>@package:</li>
+<li>@access: MixrenSystemBox.inc.php</li>
+<li>Summary: 系统 应用模板控制分配程序; 完成请求分析; 模块加载; 请求处理(执行);</li>
+<li>@Created: Fri Dec 25 16:41:02 CST 2009</li>
+<li>@Author: Zhurong</li>
+<li>@Generator: EditPlus2 &amp; Dreamweaver &amp; Zend &amp; eclipse<br>*&#x2F;</li>
+</ul>
+<p>方法注释<br>&#x2F;**</p>
+<ul>
+<li>初始化请求</li>
+<li>param参数说明<br>**&#x2F;<br>private function _parseApp(){<br>$this-&gt;_queryStr &#x3D; urldecode($_SERVER[“REQUEST_URI”]);<br>$this-&gt;_paramArr &#x3D; explode( ‘&#x2F;‘, trim(strtok($this-&gt;_queryStr,’?’),’&#x2F;‘));<br>&#x2F;&#x2F;分配请求模块<br>$appName &#x3D; DEFAULT_APP_NAME;<br>$this-&gt;_className &#x3D; $appName;<br>$this-&gt;_appFile &#x3D; APP_PATH . “{$appName}&#x2F;{$appName}.controller.php”;<br>$this-&gt;_method &#x3D; empty($this-&gt;_paramArr[0]) ?  DEFAULT_APP_METHOD : $this-&gt;_paramArr[0];<br>$this-&gt;<em>method &#x3D; “do</em>{$this-&gt;_method}”;<br>}</li>
+</ul>
+<p>类结尾注释<br>class Bin{<br>}&#x2F;&#x2F;end class</p>
+<pre><code class="hljs">
+为主要过程，算法，加入注释，方便维护和阅读。
+
+在上线前会通过上线脚本对文件进行 php -w 去注释过程，所以注释写的长不占用程序执行过程中的加载内存。
+
+# 5.代码监测
+
+专门的代码扫描脚本。
+
+扫描/website/app/下的目录，文件，方法，注释量。
+
+出报告，多少应用目录； 多少同步响应类；多少异步响应类；多少同步页面；多少异步接口；多少逻辑接口；多少model接口；多少模板；各个文件的代码注释率；等等。
+
+基于以上设计思想建立了从文件夹-》分段类文件-》功能模块方法 的树形结构设计程序架构,最大化实现CAP原则 consistency(一致性)，availability(可复用),Partition(有效划分)
+
+让PHP代码更好的积累。
+
+模板(纯html文件，呈现配置),程序数据配置文件是被加载到程序中，而不是现在将程序加载到html中一段段解释执行。
+</code></pre>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>php_code_design</div>
+      <div>http://example.com/2023/03/22/php_code_design/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/php/" title="php">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">php</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/php_for_thinkphp/" title="php_for_thinkphp">
+                        <span class="hidden-mobile">php_for_thinkphp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

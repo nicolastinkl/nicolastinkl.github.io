@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="swift tips 中级##protocol 组合在 Swift 中我们可以使用 Any 来表示任意类型 (如果你对此感到模糊或者陌 生的话,可以先看看 Apple 的 Swift 官方教程或者本书的这篇 tip)。充满好奇心的同学 可能已经发现,Any 这个类型的定义十分奇怪,它是一个 protocol&lt;&gt; 的同名类型。protocol&lt;&gt; 这样形式的写法在日常 Swi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swifttips2">
+<meta property="og:url" content="http://example.com/2023/03/22/swifttips2/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="swift tips 中级##protocol 组合在 Swift 中我们可以使用 Any 来表示任意类型 (如果你对此感到模糊或者陌 生的话,可以先看看 Apple 的 Swift 官方教程或者本书的这篇 tip)。充满好奇心的同学 可能已经发现,Any 这个类型的定义十分奇怪,它是一个 protocol&lt;&gt; 的同名类型。protocol&lt;&gt; 这样形式的写法在日常 Swi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://secure.gravatar.com/avatar/318643095c83b914cf80a7f99f247fe6.png?d=wavatar&r=G&s=48">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.813Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://secure.gravatar.com/avatar/318643095c83b914cf80a7f99f247fe6.png?d=wavatar&r=G&s=48">
+  
+  
+  
+  <title>swifttips2 - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="swifttips2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">swifttips2</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="swift-tips-中级"><a href="#swift-tips-中级" class="headerlink" title="swift tips 中级"></a>swift tips 中级</h1><p>##protocol 组合<br>在 Swift 中我们可以使用 Any 来表示任意类型 (如果你对此感到模糊或者陌 生的话,可以先看看 Apple 的 Swift 官方教程或者本书的这篇 tip)。充满好奇心的同学 可能已经发现,Any 这个类型的定义十分奇怪,它是一个 protocol&lt;&gt; 的同名类型。<br>protocol&lt;&gt; 这样形式的写法在日常 Swift 使用中其实并不多见,这其实是 Swift 的接口 组合的用法。标准的语法形式是下面这样的:</p>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bnf">protocol<span class="hljs-attribute">&lt;ProtocolA, ProtocolB, ProtocolC&gt;</span><br></code></pre></td></tr></table></figure>
+<p>尖括号内是具体接口的名称,这里表示将名称为 ProtocolA,ProtocolB 以􏰁 ProtocolC 的接口组合在一起的一个新的匿名接口。实现这个匿名接口就意味着要同时实现这三 个接口所定义的内容。所以说,这里的 protocol 组合的写法和下面的新声明的 ProtocolD 是相同的:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">protocol ProtocolD: ProtocolA, ProtocolB, ProtocolC &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>那么,在 Any 定义的时候的里面什么都不写的 protocol&lt;&gt; 是什么意思呢?从语意上来 说,这代表一个 “需要实现空接口的接口”,其实就是任意类型的意思了。</p>
+<p>除了可以方便地表达空接口这一概念以外,protocol 的组合相比于新创建一个接口的最 大区别就在于其匿名性。有时候我们可以借助这个特性写出更清晰的代码。因为 Swift 的类型组􏰃是比较松散的,你的类型可以由不同的 extension 来定义实现不同的接口, Swift 也并没有要求它们在同一个文件中。这样,当一个类型实现了很多接口时,在使 用这个类型的时候我们很可能在不查询相关代码的情况下很难知道这个类型所实现的 接口。</p>
+<p>举个理想化的例子,比如我们有下面的三个接口,分别代表了三种动物的叫的方式,而 有一种谜之动物,同时实现了这三个接口:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">protocol</span> <span class="hljs-title class_">KittenLike</span> &#123;<br>    <span class="hljs-keyword">func</span> <span class="hljs-title function_">meow</span>() -&gt; <span class="hljs-type">String</span><br>&#125;<br><span class="hljs-keyword">protocol</span> <span class="hljs-title class_">DogLike</span> &#123;<br>    <span class="hljs-keyword">func</span> <span class="hljs-title function_">bark</span>() -&gt; <span class="hljs-type">String</span><br>&#125;<br><span class="hljs-keyword">protocol</span> <span class="hljs-title class_">TigerLike</span> &#123;<br>    <span class="hljs-keyword">func</span> <span class="hljs-title function_">aou</span>() -&gt; <span class="hljs-type">String</span><br><span class="hljs-number">60</span><br><span class="hljs-keyword">protocol</span> 组合 61 &#125;<br><span class="hljs-title class_">class</span> <span class="hljs-title class_">MysteryAnimal</span>: <span class="hljs-title class_">CatLike</span>, <span class="hljs-title class_">DogLike</span>, <span class="hljs-title class_">TigerLike</span> &#123;<br>    <span class="hljs-keyword">func</span> <span class="hljs-title function_">meow</span>() &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;meow&quot;</span> &#125;<br><span class="hljs-keyword">func</span> <span class="hljs-title function_">bark</span>() &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;bark&quot;</span> &#125;<br><span class="hljs-keyword">func</span> <span class="hljs-title function_">aou</span>() &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;aou&quot;</span> &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>现在我们想要检查某种动物作为宠物的时候的叫声的话,我们可能要重新定义一个 叫做 PetLike 的接口,表明其实现 KittenLike 和 DogLike;如果稍后我们又想检查某 种动物作为猫科动物的叫声的话,我们也许又要去定义一个叫做 CatLike 这样的实现 KittenLike 和 TigerLike 的接口。最后我们大概会写出这样的东西:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">protocol</span> <span class="hljs-title class_">PetLike</span>: <span class="hljs-title class_">KittenLike</span>, <span class="hljs-title class_">DogLike</span> &#123;<br>&#125;<br><span class="hljs-keyword">protocol</span> <span class="hljs-title class_">CatLike</span>: <span class="hljs-title class_">KittenLike</span>, <span class="hljs-title class_">TigerLike</span> &#123;<br>&#125;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">SoundChecker</span> &#123;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">func</span> <span class="hljs-title function_">checkPetTalking</span>(<span class="hljs-params">pet</span>: <span class="hljs-type">PetLike</span>) &#123;<br><span class="hljs-comment">//...</span><br>&#125;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">func</span> <span class="hljs-title function_">checkCatTalking</span>(<span class="hljs-params">cat</span>: <span class="hljs-type">CatLike</span>) &#123; <span class="hljs-comment">//...</span><br>&#125; &#125;<br><br></code></pre></td></tr></table></figure>
+<p>虽然没有引入定义任何新的内容,但是为了实现这个需求,我们还是添加了两个空 protocol,这可能会让人困惑,代码的使用者 (也包括一段时间后的你自己) 可能会去猜 测 PetLike 和 CatLike 的作用 –</p>
+<p>其实它们除了标注以外并没有其他作用。借助 protocol 组合的特性,我们可以很好的解决这个问题。protocol 组合是可以使用 typealias 来命名 的,于是可以将上面的新定义 protocol 的部分换为:</p>
+<pre><code class="hljs">typealias PetLike = protocol&lt;KittenLike, DogLike&gt;
+typealias CatLike = protocol&lt;KittenLike, TigerLike&gt;
+</code></pre>
+<p>这样既保持了可读性,也没有多定义不必要的新类型。<br>另外,其实如果这两个临时接口我们就只用一次的话,如果上下文里理解起来不会有 困难,我们完全可以直接将它们匿名化,变成下面这样:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">SoundChecker</span> &#123;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">func</span> <span class="hljs-title function_">checkPetTalking</span>(<span class="hljs-params">pet</span>: <span class="hljs-keyword">protocol</span><span class="hljs-operator">&lt;</span><span class="hljs-type">KittenLike</span>, <span class="hljs-type">DogLike</span><span class="hljs-operator">&gt;</span>) &#123;<br><span class="hljs-comment">//...</span><br>&#125;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">func</span> <span class="hljs-title function_">checkCatTalking</span>(<span class="hljs-params">cat</span>: <span class="hljs-keyword">protocol</span><span class="hljs-operator">&lt;</span><span class="hljs-type">KittenLike</span>, <span class="hljs-type">TigerLike</span><span class="hljs-operator">&gt;</span>) &#123; <span class="hljs-comment">//...</span><br>&#125; &#125;<br><br></code></pre></td></tr></table></figure>
+
+
+<p>这样的好处是定义和使用的地方更加接近,这在代码复杂的时候读代码时可以少一些 跳转,多一些专注。但是因为使用了匿名的接口组合,所以能表达的信息毕竟少了一 些。如果要实际使用这种方法的话,还是需要多多斟酌。</p>
+<p>虽然这一节已经够长了,不过我还是想多提一句关于实现多个接口时接口内方法冲突 的解决方法。因为在 Swift 的世界中没有人限制或者保证过不同接口的方法不能重名, 所以这是有可能出现的情况。比如有 A 和 B 两个接口,定义如下:</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">protocol A &#123;<br>    func bar<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> Int<br>&#125;<br>protocol B &#123;<br>    func bar<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> <span class="hljs-built_in">String</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+<p>两个接口中 bar() 只有返回值的类型不同。我们如果有一个类型 Class 同时实现了 A 和 B,我们要怎么才能避免和解决调用冲突呢?</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Class</span>: A, B &#123;<br>    func bar<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> Int &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    &#125;<br>    func bar<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> <span class="hljs-built_in">String</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hi&quot;</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>这样一来,对于 bar(),只要在调用前进行类型转换就可以了:</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br><span class="hljs-keyword">let</span> <span class="hljs-keyword">instance</span> = Class()<br><span class="hljs-keyword">let</span> num = (<span class="hljs-keyword">instance</span> <span class="hljs-keyword">as</span> A).bar()<span class="hljs-comment">// 1</span><br><span class="hljs-keyword">let</span> str = (<span class="hljs-keyword">instance</span> <span class="hljs-keyword">as</span> B).bar()<span class="hljs-comment">// &quot;Hi&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>##static 和 class</p>
+<p>Apple 表示今后将会考虑在某个升级版本中实装 class 类型 的类存储变量,现在的话,我们只能在 class 中用 class 关键字声明方法和计算属性。</p>
+<p>有一个比较特殊的是 protocol。在 Swift 中 class,struct 和 enum 都是可以实现 protocol 的。那么如果我们想在 protocol 里定义一个类型域上的方法或者计算属性的话,应该 用哪个关键字呢?答案是<code>使用 class 进行定义,但是在实现时还是按照上面的规则:在 class 里使用 class 关键字,而在 struct 或 enum 中仍然使用 static – 虽然在 protocol 中定义时使用的是 class</code>:</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><br>protocol MyProtocol &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">func</span> foo<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> <span class="hljs-built_in">String</span><br>&#125;<br>struct MyStruct: MyProtocol &#123;<br>    <span class="hljs-keyword">static</span> func foo<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> <span class="hljs-built_in">String</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;MyStruct&quot;</span><br>    &#125;<br>&#125;<br><span class="hljs-keyword">enum</span> MyEnum: MyProtocol &#123;<br>    <span class="hljs-keyword">static</span> func foo<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> <span class="hljs-built_in">String</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;MyEnum&quot;</span> &#125;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>: MyProtocol &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">func</span> foo<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> <span class="hljs-built_in">String</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;MyClass&quot;</span> &#125;<br>&#125;<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">someClass</span> &#123;<br>            <span class="hljs-keyword">class</span> <span class="hljs-title class_">func</span>  one() &#123;<br>                println(<span class="hljs-string">&quot;OK&quot;</span>)<br>            &#125;<br>&#125;<br><br><br>someClass.one()<br><br></code></pre></td></tr></table></figure>
+
+<p>##@objc 和 dynamic<br>Apple 采取的做法是允许我们在同一个项目中同时使用 Swift 和 Objective-C 来进行开 发。其实一个项目中的 Objective-C 文件和 Swift 文件是处于两个不同世界中的,为了让 它们能相互联通,我们需要添加一些桥梁。</p>
+<p>首先通过添加 <code>&#123;product-module-name&#125;-Bridging-Header.h</code> 文件,并在其中填写想要使用 的头文件名称,我们就可以很容易地在 Swift 中使用<code>Objective-C</code>代码了。Xcode 为了简 化这个设定,甚至在 Swift 项目中第一次导入 Objective-C 文件时会主动弹框进行询问是 否要自动创建这个文件,可以说是非常方便。</p>
+<p>但是如果想要在 Objective-C 中使用 Swift 的类型的时候,事情就复杂一些。如果是来自 外部的框架,那么这个框架与 Objective-C 项目肯定不是处在同一个 target 中的,我们 需要对外部的 <code>Swift module </code>进行导入。这个其实和使用 Objective-C 的原来的 Framework 是一样的,对于一个项目来说,外界框架是由 Swift 写的还是 Objective-C 写的,两者并 没有太大区别。我们通过使用 2013 年新引入的 @import 来引入 module:<code>@import MySwiftKit;</code></p>
+<p>之后就可以正常使用这个 Swift 写的框架了。<br>如果想要在 Objective-C 里使用的是同一个项目中的 Swift 的源文件的话,可以直接导 入自动生成的头文件<code> &#123;product-module-name&#125;-Swift.h</code> 来完成。比如项目的 target 叫做 MyApp 的话,我们就需要在 Objective-C 文件中写</p>
+<pre><code class="hljs">#import &quot;MyApp-Swift.h&quot;
+</code></pre>
+<p>但这只是故事的开始。Objective-C 和 Swift 在底层使用的是两套完全不同的机制,Cocoa 中的 Objective-C 对象是基于运行时的,它从骨子里遵循了 KVC (Key-Value Coding,通 过类似字典的方式存储对象信息) 以􏰁动态派发 (Dynamic Dispatch,在运行调用时再决 定实际调用的具体实现)。而 Swift 为了追求性能,如果没有特殊需要的话,是不会在运 行时再来决定这些的。也就是说,Swift 类型的成员或者方法在编译时就已经决定,而 运行时便不再需要经过一次查找,而可以直接使用。</p>
+<p>显而易见,这带来的问题是如果我们要使用 Objective-C 的代码或者特性来调用纯 Swift 的类型时候,我们会因为找不到所需要的这些运行时信息,而导致失败。解决起来也 很简单,在 Swift 类型文件中,我们可以将需要暴露给 Objective-C 使用的任何地方 (包 括类,属性和方法等) 的声明前面加上 @objc 修饰符。注意这个步骤只需要对那些不是 继承自 NSObject 的类型进行,如果你用 Swift 写的 class 是继承自 NSObject 的话,Swift</p>
+<p>会默认自动为所有的非 private 的类和成员加上 @objc。这就是说,对一个 NSObject 的<br>子类,你只需要导入相应的头文件就可以在 Objective-C 里使用这个类了。</p>
+<p><code>@objc</code> 修饰符的另一个作用是为 Objective-C 侧重新声明方法或者变量的名字。虽然绝大 部分时候自动转换的方法名已经足够好用 (比如会将 Swift 中类似 <code>init(name: String)</code> 的 方法转换成</p>
+<pre><code class="hljs">-initWithName:(NSString *)name
+</code></pre>
+<p>这样),但是有时候我们还是期望 Objective- C 里使用和 Swift 中不一样的方法名或者类的名字,比如 Swift 里这样的一个类:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">class</span> 我的类 &#123;<br><span class="hljs-keyword">func</span> <span class="hljs-title function_">打招呼</span>(<span class="hljs-params">名字</span>: <span class="hljs-type">String</span>) &#123;<br>    println(<span class="hljs-string">&quot;哈喽,<span class="hljs-subst">\(名字)</span>&quot;</span>) &#125;<br>&#125;<br>我的类().打招呼(<span class="hljs-string">&quot;小明&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+<p>Objective-C 的话是无法使用中文来进行调用的,因此我们必须使用 @objc 将其转为 ASCII 才能在 Objective-C 里访问:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">@objc(MyClass)</span><br><span class="hljs-keyword">class</span> 我的类 &#123;<br><span class="hljs-keyword">@objc</span>(greeting:)<br><span class="hljs-keyword">func</span> <span class="hljs-title function_">打招呼</span>(<span class="hljs-params">名字</span>: <span class="hljs-type">String</span>) &#123;<br>    println(<span class="hljs-string">&quot;哈喽,<span class="hljs-subst">\(名字)</span>&quot;</span>) &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>这样,我们在 Objective-C 里就能调用 [[MyClass new] greeting:@”XiaoMing”] 这样的代 码了 (虽然比起原来一点都不好玩了)。另外,正如上面所说的以􏰁在 Selector 一节中所 提到的,即使是 NSObject 的子类,Swift 也不会在被标记为 private 的方法或成员上自 动加 @objc。如果我们需要使用这些内容的动态特性的话,我们需要手动给它们加上 @objc 修饰。</p>
+<p>添加 @objc 修饰符并不意味着这个方法或者属性会变成动态派发,Swift 依然可能会将 其优化为静态调用。如果你需要和 Objective-C 里动态调用时相同的运行时特性的话, 你需要使用的修饰符是 dynamic。一般情况下在做 app 开发时应该用不上,但是在施展 一些像动态替换方法或者运行时再决定实现这样的 “黑魔法” 的时候,我们就需要用到 dynamic 修饰符了。在 KVO 一节中,我们提到了一个关于使用 dynamic 的实例。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>部分来自 <img src="https://secure.gravatar.com/avatar/318643095c83b914cf80a7f99f247fe6.png?d=wavatar&r=G&s=48" srcset="/img/loading.gif" lazyload> <a target="_blank" rel="noopener" href="https://selfstore.io/products/171">@onevcat</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>swifttips2</div>
+      <div>http://example.com/2023/03/22/swifttips2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/swifts_new_access_levels/" title="swifts_new_access_levels">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">swifts_new_access_levels</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/swiftzhileixingyinyongleixing/" title="swiftzhileixingyinyongleixing">
+                        <span class="hidden-mobile">swiftzhileixingyinyongleixing</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

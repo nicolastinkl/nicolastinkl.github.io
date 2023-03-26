@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="arithmetic算法 统治世界的十大算法 算法学习资料  #统治世界的十大算法 ###什么是算法？  通俗而言，算法是一个定义明确的计算过程，可以一些值或一组值作为输入并产生一些值或一组值作为输出。因此算法就是将输入转为输出的一系列计算步骤。  ###简而言之，算法就是可完成特定任务的一系列步骤，它应该具备三大特征 1、有限  2、指令明确  3、有效  Marcos Otero 推荐的十大算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="arithmetic">
+<meta property="og:url" content="http://example.com/2023/03/22/arithmetic/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="arithmetic算法 统治世界的十大算法 算法学习资料  #统治世界的十大算法 ###什么是算法？  通俗而言，算法是一个定义明确的计算过程，可以一些值或一组值作为输入并产生一些值或一组值作为输出。因此算法就是将输入转为输出的一系列计算步骤。  ###简而言之，算法就是可完成特定任务的一系列步骤，它应该具备三大特征 1、有限  2、指令明确  3、有效  Marcos Otero 推荐的十大算">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://a.36krcnd.com/photo/2014/4517c4d946db8531277f333d6a7f6491.png">
+<meta property="og:image" content="http://a.36krcnd.com/photo/2014/474cc7ff645f718306b75d8424dcd510.jpg">
+<meta property="og:image" content="http://a.36krcnd.com/photo/2014/21924f5958515dd7fdc7da1cd37e9639.jpeg">
+<meta property="og:image" content="http://a.36krcnd.com/photo/2014/bdd65b3a4b0fb9f9279e825be9c1fa80.jpg">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.610Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://a.36krcnd.com/photo/2014/4517c4d946db8531277f333d6a7f6491.png">
+  
+  
+  
+  <title>arithmetic - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="arithmetic"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">arithmetic</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="arithmetic算法"><a href="#arithmetic算法" class="headerlink" title="arithmetic算法"></a>arithmetic算法</h1><ul>
+<li>统治世界的十大算法</li>
+<li>算法学习资料</li>
+</ul>
+<p>#<code>统治世界的十大算法</code><br> ###什么是算法？</p>
+<blockquote>
+<p>通俗而言，算法是一个定义明确的计算过程，可以一些值或一组值作为输入并产生一些值或一组值作为输出。因此算法就是将输入转为输出的一系列计算步骤。</p>
+</blockquote>
+<p>###简而言之，算法就是可完成特定任务的一系列步骤，它应该具备三大特征<br> 1、有限</p>
+<p> 2、指令明确</p>
+<p> 3、有效</p>
+<blockquote>
+<p>Marcos Otero 推荐的十大算法</p>
+</blockquote>
+<p>###1. 归并排序、快速排序及堆积排序<br><img src="http://a.36krcnd.com/photo/2014/4517c4d946db8531277f333d6a7f6491.png" srcset="/img/loading.gif" lazyload></p>
+<p>最好的排序算法跟需求密切相关，很难评判。但是从使用上说，这三种的使用频率更高。</p>
+<p><code>归并排序</code>由冯•诺依曼于 1945 年发明。这是一种基于比较的排序算法，采用分而治之的办法解决问题，其阶是 O(n^2)。</p>
+<p><code>快速排序</code>可采用原地分割方法，也可采用分而治之算法。这不是一种稳定的排序算法，但对于基于 RAM（内存）的数组排序来说非常有效。</p>
+<p><code>堆排序</code>采用优先级队列来减少数据中的搜索时间。该算法也是原地算法，并非稳定排序。<br>这些排序算法相对于以前的冒泡排序算法等有了巨大改进，实际上我们今天的数据挖掘、人工智能、链接分析及包括 web 在内的大多数计算工具都要感谢它们。</p>
+<p>###2、傅里叶变换与快速傅里叶变换<br><img src="http://a.36krcnd.com/photo/2014/474cc7ff645f718306b75d8424dcd510.jpg" srcset="/img/loading.gif" lazyload><br>我们的整个数字世界都使用这两个简单但非常强大的算法，其作用是将信号从时域转为频域或者反之。实际上，你看得到这篇文章得感谢这些算法。</p>
+<p>互联网、你的 WiFi、智能手机、电话、计算机、路由器、卫星，几乎所有内置有计算机的东西都会以各种方式使用这两算法。如果不研究这些算法，你就拿不到电子、计算或通信方面的学位。</p>
+<p>###3、迪杰斯特拉（Dijkstra）算法<br><img src="http://a.36krcnd.com/photo/2014/21924f5958515dd7fdc7da1cd37e9639.jpeg" srcset="/img/loading.gif" lazyload><br><code>Dijkstra</code>是一种图谱搜索算法。许多问题都可以建模为图谱，然后利用 Dijkstra 寻找两个节点之间的最短路径。如果没有 Dijkstra 算法，互联网的运营效率必将大大降低。虽然今天我们已经有了更好的寻找最短路径的解决方案，但出于稳定性的要求，Dijkstra 算法仍然被很多系统使用。</p>
+<p>###4、RSA算法<br>如果没有密码术和网络安全，互联网就不会像今天一样重要，因为电子商务和电子交易需要这些技术来确保交易安全。而RSA算法是最重要的密码学算法之一。该算法由同名公司的创始人（Ron Rivest、Adi Shamir 和 Leonard Adleman）开发，它让密码学普及到了千家万户并奠定了密码术的应用基础。RSA 要解决的问题既简单又复杂：如何在独立平台与最终用户之间共享公钥。其解决方案是加密。RSA 加密的基础是一个十分简单的数论事实：将两个大素数相乘十分容易，但是想要对其乘积进行因式分解却极其困难，因此可以将乘积公开作为加密密钥。但在分布式计算和量子计算机理论日趋成熟的今天，RSA 加密安全性受到了挑战。</p>
+<p>###5、安全哈希算法（SHA）</p>
+<p>这个实际上并不算是算法，而是由美国国家标准技术研究所开发的一系列密码杂凑函数。但是这系列函数是全世界运作的基石。应用商店，电子邮件、反病毒、浏览器等在使用SHA系列函数，SHA 函数可用来确定下载的东西是否自己想要的东西，还是说遭遇了中间人攻击或钓鱼攻击。</p>
+<p>###6、整数因子分解</p>
+<p>这是一个在计算领域使用频繁的数学算法。如果没有这一算法，密码术就会变得不安全得多。整数因子分解是用来将一个合数分解成一系列素因子的一系列步骤。整数因子分解可被视为是 FNP 问题（FNP 是难以解决的典型 NP 问题的扩展）。</p>
+<p>许多密码协议均基于难以分解的大型合数或相关问题。比方说前面提到的 RSA 问题。如果有算法能够有效分解任意数字，那么就会使得基于 RSA 的公钥密码系统陷入不安全的境地。</p>
+<p>而量子计算的诞生则令此问题的解决变得容易，从而也打开了一个全新的领域，可利用量子世界的属性来令系统更加安全。<br>###7、链接分析<br><img src="http://a.36krcnd.com/photo/2014/bdd65b3a4b0fb9f9279e825be9c1fa80.jpg" srcset="/img/loading.gif" lazyload><br>在互联网时代，不同实体间关系的分析至关重要。从搜索引擎和社交网络到营销分析工具，每个人都想找出互联网的真正结构。</p>
+<p>链接分析无疑是公众对算法的最大困惑与迷思之一。其问题在于进行链接分析有不同的方式，而增加一些特征就会令每一算法略有不同（从而使得算法受到专利保护），但基本上这些算法都是类似的。</p>
+<p>链接分析算法首先由 Gabriel Pinski 和 Francis Narin 在 1976 年发明。其背后的思路很简单，即把图谱以矩阵的形式表示，从而转为特征值问题，而特征值有助于了解图谱结构及每个节点的相对重要性。</p>
+<p>Google 的 PageRank，Facebook 展示新闻源，Google+，Facebook 朋友推荐，LinkedIn 工作及联系人推荐，Netflix 与 Hulu 的电影推荐，YouTube 视频推荐等均使用了链接分析算法。虽然每个都有不同的目标和参数，但其背后的数学是一样的。</p>
+<p>尽管 Google 似乎是利用此类算法的第一家公司，但是实际上百度创始人李彦宏在 Google 诞生 2 两年前做的搜索引擎“RankDex”已经利用这种思路来进行搜索排名了。</p>
+<p>###8、比例积分微分算法</p>
+<p>如果你用过飞机、汽车、微型服务或手机网络，如果你在工厂呆过或者见过机器人，那么你已经见识过这一PID算法的作用了。</p>
+<p>该算法利用了控制回路机制来让期望输出信号与实际输出信号之间的错误降到最小。只要需要信号处理或需要电子系统来控制自动化的机械、水力或热力系统就要用到它。</p>
+<p>因此可以说如果没有这一算法，人类的现代文明将不复存在。</p>
+<p>###9、数据压缩算法</p>
+<p>数据压缩算法无疑是非常重要的，因为几乎在所有的结构中都要用到。除了最明显的压缩文档以外，网页下载时也会压缩，视频游戏、视频、音乐、数据存储、云计算、数据库等等也都要使用压缩算法。可以说几乎所有应用都要使用压缩算法。压缩算法令系统更有效成本更低，但是要想确定哪一个最重要却很困难，因为应用不同，使用的压缩算法从 zip 到 mp3、JPEG 或 MPEG-2 各异。</p>
+<p>###10、随机数生成算法</p>
+<p>很多应用都需要随机数。像 interlink connection，密码系统、视频游戏、人工智能、优化、问题的初始条件，金融等都需要生成随机数。但实际上目前我们并没有“真正”的随机数生成器，尽管有一些伪随机数生成器也是非常有效的。</p>
+<p>当然，十大算法也可能给有凑数之嫌，审视的角度不同对算法的重要性看法也会很不一样，如果你认为这一榜单有错漏的地方，不妨在评论中贡献你的意见。</p>
+<p>#<code>算法学习资料</code></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/category/795430">结构之法 算法之道</a> 该博主学习结构和算法已经走火入魔</li>
+<li><a target="_blank" rel="noopener" href="http://top.jobbole.com/1322/">预览算法视频</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.jobbole.com/77280/">内存回收算法视频</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>arithmetic</div>
+      <div>http://example.com/2023/03/22/arithmetic/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/androidcomplie/" title="androidcomplie">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">androidcomplie</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/antetype/" title="antetype">
+                        <span class="hidden-mobile">antetype</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zeus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="破解软件的问题，其实不仅仅是iOS上，几乎所有平台上，无论是pc还是移动终端，都是顽疾。可能在中国这块神奇的国度，大家都习惯用盗版了，并不觉得这是个问题，个人是这么想，甚至某些盈利性质的公司也这么想，著名的智能手机门户网站91.com前不久就宣传自己平台上盗版全，不花钱。其实这种把盗版软件当成噱头的网站很多，当然还没出现过91这种义正言辞地去宣传用盗版是白富美，买正版是傻X的公司。大家都是做实诚样">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cydia">
+<meta property="og:url" content="http://example.com/2023/03/22/cydia/index.html">
+<meta property="og:site_name" content="Zeus">
+<meta property="og:description" content="破解软件的问题，其实不仅仅是iOS上，几乎所有平台上，无论是pc还是移动终端，都是顽疾。可能在中国这块神奇的国度，大家都习惯用盗版了，并不觉得这是个问题，个人是这么想，甚至某些盈利性质的公司也这么想，著名的智能手机门户网站91.com前不久就宣传自己平台上盗版全，不花钱。其实这种把盗版软件当成噱头的网站很多，当然还没出现过91这种义正言辞地去宣传用盗版是白富美，买正版是傻X的公司。大家都是做实诚样">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T03:31:10.000Z">
+<meta property="article:modified_time" content="2023-03-26T01:52:43.637Z">
+<meta property="article:author" content="Zeus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>cydia - Zeus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cydia"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-22 11:31" pubdate>
+          2023年3月22日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          64 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">cydia</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>破解软件的问题，其实不仅仅是iOS上，几乎所有平台上，无论是pc还是移动终端，都是顽疾。可能在中国这块神奇的国度，大家都习惯用盗版了，并不觉得这是个问题，个人是这么想，甚至某些盈利性质的公司也这么想，著名的智能手机门户网站91.com前不久就宣传自己平台上盗版全，不花钱。其实这种把盗版软件当成噱头的网站很多，当然还没出现过91这种义正言辞地去宣传用盗版是白富美，买正版是傻X的公司。大家都是做实诚样，把最新最受欢迎的盗版应用一一挂在首页来吸引用户。同步助手就是这种内有好货，不要错过的代表，并且在盗版圈子里，享有良好的口碑，号称同步在手，江山我有。</p>
+<p>其实iOS破解软件的问题，既不起源于中国，现阶段也没有发扬光大到称霸的地位，目前属于老二，当然很有希望赶超。据统计，全球范围内，排名前五的破解app分享网站有以下几家：</p>
+<ol>
+<li><p>Apptrack    代表软件：Crackulous，clutch<br>破解界的老大哥，出品了多款易用的破解软件，让人人都会破解，鼓励分享破解软件，破解app共享卡正以恐怖的速度扩充。</p>
+</li>
+<li><p>AppCake代表软件：CrackNShare<br>新秀，支持三种语言，中文（难得！）、英文、德文，前景很可观</p>
+</li>
+<li><p>KulApps 北美</p>
+</li>
+<li><p>iDownloads 俄国</p>
+</li>
+<li><p>iGUI 俄国</p>
+</li>
+</ol>
+<p>以上消息，对于依靠安装包收费的iOS开发来说，无疑是噩耗，其实由不少人也在网上号召支持正版，要求知识产权保护的力度加强。这些愿望或许终有一天会实现，但从技术的角度来分析问题的所在，给出有效的防御方案，无疑比愿望更快。</p>
+<p>－－－－破解原理部分－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
+<p>Appstore上的应用都采用了DRM（digital rights management）数字版权加密保护技术，直接的表现是A帐号购买的app，除A外的帐号无法使用，其实就是有了数字签名验证，而app的破解过程，实质也是去除数字签名的过程。去除过程包括两部分，如下所示：</p>
+<p>条件一，设备越狱，获得root权限，去除掉设备上的签名检查，允许没有合法签名的程序在设备上运行</p>
+<p>代表工具：AppSync（作者：Dissident ，Apptrack网站的核心人物）<br>（iOS 3.0 出现，不同的iOS版本，原理都不一样）<br>iOS 3.0后，MobileInstallation将可执行文件的签名校验委托给独立的二进制文件&#x2F;usrlibexec&#x2F;installd来处理,而AppSync 就是该执行文件的一个补丁，用来绕过签名校验。</p>
+<p>iOS 4.0后，apple留了个后门（app给开发者预留的用于测试的沙盒环境），只要在&#x2F;var&#x2F;mobile&#x2F;下建立tdmtanf目录，就可以绕过installd的签名校验，但该沙盒环境会造成没法进行IAP购买，无法在GameCenter查看游戏排名和加好友，特征是进入Game Center会出现SandBox字样。AppSync for iOS 4.0 +修复了这一问题。</p>
+<p>iOS 5.0后，apple增加了新的安全机制来保护二进制文件，例如去掉二进制文件的符号表，给破解带来了难度。新版的AppSync for iOS 5.0+ 使用MobileSubstrate来hook libmis.dylib库的MISValidateSignatureAndCopyInfo函数来绕过签名验证</p>
+<p>条件二，解密mach－o可执行文件<br>一般采用自购破解的方法，即先通过正常流程购买appstore 中的app，然后采用工具或手工的方式解密安装包中的mach－o可执行文件。<br>之所以要先获得正常的IPA的原因是mach－O文件是有DRM数字签名的，是加密过的，而解密的核心就是解密加密部分，而我们知道，当应用运行时，在内存中是处于解密状态的。所以首要步骤就是让应用先正常运行起来，而只有正常购买的应用才能达到这一目的，所以要先正常购买。</p>
+<p>购买后，接着就是破解了。随着iOS设备cpu 的不同（arm 6 还是arm 7），mach－o文件格式的不同（thin binary 还是fat binary），应用是否对破解有防御措施（检测是否越狱，检测应用文件系统的变化），破解步骤也有所不同，但核心步骤如下：</p>
+<p>第一步：获得cryptid，cryptoffset，cryptsize<br>cryptid为加密状态，0表示未加密，1表示解密；<br>cryptoffset未加密部分的偏移量，单位bytes<br>cryptsize加密段的大小，单位bytes<br>第二步：将cryptid修改为0<br>第三步：gdb导出解密部分<br>第四步：用第二步中的解密部分替换掉加密部分<br>第五步：签名<br>第六步：打包成IPA安装包</p>
+<p>整个IPA破解历史上，代表性的工具如下：</p>
+<p>代表工具：Crackulous（GUI工具）（来自Hackulous）</p>
+<p>crackulous最初版本由SaladFork编写，是基于DecryptApp shell脚本的，后来crackulous的源码泄露，SaladFork放弃维护，由Docmorelli接手，创建了基于Clutch工具的最近版本。</p>
+<p>代表工具：Clutch（命令行工具）（来自Hackulous）<br>由dissident编写，Clutch从发布到现在，是最快的破解工具。Clutch工具支持绕过ASLR（apple在iOS 4.3中加入ASLR机制）保护和支持Fat Binaries，基于icefire的icecrack工具，objective－c编写。</p>
+<p>代表工具：PoedCrackMod（命令行工具）（来自Hackulous）<br>由Rastignac编写，基于poedCrack，是第一个支持破解fat binaries的工具。shell编写</p>
+<p>代表工具：CrackTM（命令行工具）（来自Hackulous）<br>由MadHouse编写，最后版本为3.1.2，据说初版在破解速度上就快过poedCrack。shell编写</p>
+<p>（以下是bash脚本工具的发展历史（脚本名（作者）），虽然目前都已废弃，但都是目前好用的ipa 破解工具的基础。<br>autop(Flox)——&gt;xCrack(SaladFork)——&gt;DecryptApp(uncon)——&gt;Decrypt(FloydianSlip)——&gt;poedCrack（poedgirl）——&gt;CrackTM(MadHouse)</p>
+<p>代表工具：CrackNShare （GUI工具）（来自appcake）<br>基于PoedCrackMod 和 CrackTM</p>
+<p>我们可以通过分析这些工具的行为，原理及产生的结果来启发防御的方法。</p>
+<p>像AppSync这种去掉设备签名检查的问题还是留给apple公司来解决（属于iOS系统层的安全），对于app开发则需要重点关注，app是如何被解密的（属于iOS应用层的安全）。</p>
+<p>我们以PoedCrackMod和Clutch为例</p>
+<p>一、PoedCrackMod分析（v2.5）<br>源码及详细的源码分析见：<br><a target="_blank" rel="noopener" href="http://danqingdani.blog.163.com/blog/static/18609419520129261354800/">http://danqingdani.blog.163.com/blog/static/18609419520129261354800/</a></p>
+<p>通过分析源码，我们可以知道，整个破解过程，除去前期检测依赖工具是否存在（例如ldid，plutil，otool，gdb等），伪造特征文件，可以总结为以下几步：</p>
+<p>第一步. 将fat binary切分为armv6，armv7部分（采用swap header技巧）<br>第二步：获得cryptid，cryptoffset，cryptsize<br>第三步. 将armv6部分的cryptid修改为0，gdb导出对应的armv6解密部分（对经过swap header处理的Mach－O文件进行操作，使其在arm 7设备上，强制运行arm 6部分），替换掉armv6加密部分，签名<br>第四步. 将armv7部分的cryptid修改为0，gdb导出对应的armv7解密部分（对原Mach－O文件进行操作)，替换掉armv7加密部分，签名<br>第五步.合并解密过的armv6，armv7<br>第六步.打包成ipa安装包</p>
+<p>注明：第三步和第四步是破解的关键，破解是否成功的关键在于导出的解密部分是否正确完整。<br>由于binary fat格式的mach－o文件在arm 7设备上默认运行arm 7对应代码，当需要导出arm 6对应的解密部分时，要先经过swap header处理，使其在arm 7 设备上按arm 6运行。</p>
+<p>二、clutch分析<br>对于最有效的clutch，由于只找到了clutch 1.0.1的源码（最新版本是1.2.4）。所以从ipa破解前后的区别来观察发生了什么。<br>使用BeyondCompare进行对比，发现有以下变动。</p>
+<ol>
+<li>正版的iTunesMetadata.plist被移除<br>该文件用来记录app的基本信息，例如购买者的appleID，app购买时间、app支持的设备体系结构，app的版本、app标识符</li>
+</ol>
+<p>2.正版的SC_Info目录被移除<br>SC_Info目录包含appname.sinf和appname.supp两个文件。<br>（1）SINF为metadata文件<br>（2）SUPP为解密可执行文件的密钥</p>
+<h2 id="3-可执行文件发生的变动非常大-但最明显的事是cryptid的值发生了变化leetekiMac-mini-xxx-app-leedani-otool-l-appname-grep-“cmd-LC-ENCRYPTION-INFO”-A-4-cmd-LC-ENCRYPTION-INFO-cmdsize-20-cryptoff-8192-cryptsize-6053888-cryptid-0"><a href="#3-可执行文件发生的变动非常大-但最明显的事是cryptid的值发生了变化leetekiMac-mini-xxx-app-leedani-otool-l-appname-grep-“cmd-LC-ENCRYPTION-INFO”-A-4-cmd-LC-ENCRYPTION-INFO-cmdsize-20-cryptoff-8192-cryptsize-6053888-cryptid-0" class="headerlink" title="3.可执行文件发生的变动非常大,但最明显的事是cryptid的值发生了变化leetekiMac-mini:xxx.app leedani$ otool -l appname | grep “cmd LC_ENCRYPTION_INFO” -A 4          cmd LC_ENCRYPTION_INFO      cmdsize 20    cryptoff  8192    cryptsize 6053888    cryptid   0"></a>3.可执行文件发生的变动非常大,但最明显的事是cryptid的值发生了变化<br>leetekiMac-mini:xxx.app leedani$ otool -l appname | grep “cmd LC_ENCRYPTION_INFO” -A 4<br>          cmd LC_ENCRYPTION_INFO<br>      cmdsize 20<br>    cryptoff  8192<br>    cryptsize 6053888<br>    cryptid   0</h2><pre><code class="hljs">      cmd LC_ENCRYPTION_INFO
+  cmdsize 20
+cryptoff  8192
+cryptsize 5001216
+cryptid   0
+</code></pre>
+<p>iOS平台游戏安全之IPA破解 - danqingdani - 碳基体</p>
+<p>iTunesMetadata.plist 与 SC_Info目录的移除只是为了避免泄露正版购买者的一些基本信息，是否去除不影响ipa的正常安装运行。</p>
+<p>－－－－破解防御部分－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br>在IPA防御方面，目前没有预防破解的好办法，但可以做事后检测，使得破解IPA无法正常运行以达到防御作用。<br>而该如何做事后检测呢，最直接的检测方法是将破解前后文件系统的变化作为特征值来检测。</p>
+<p>通过分析PoedCrackMod源码，会发现根据破解前后文件时间戳的变化，或文件内容的变化为特征来判断是不可靠的，因为这些特征都可以伪造。如下所示，摘自于PoedCrackMod脚本</p>
+<p>1.Info.plist<br>增加SignerIdentity,(目前主流的MinimumOSVersion版本为3.0，版本3.0之前的需要伪造SignerIdentity）<br> plutil -key ‘SignerIdentity’ -value ‘Apple iPhone OS Application Signing’ “$WorkDir&#x2F;$AppName&#x2F;Info.plist” 2&gt;&amp;1&gt; &#x2F;dev&#x2F;null</p>
+<p>伪造Info.plist文件时间戳<br>touch -r “$AppPath&#x2F;$AppName&#x2F;Info.plist” “$WorkDir&#x2F;$AppName&#x2F;Info.plist”</p>
+<p>2.iTunesMetadata.plist<br>伪造iTunesMetadata.plist文件<br>plutil -xml “$WorkDir&#x2F;iTunesMetadataSource.plist” 2&gt;&amp;1&gt; &#x2F;dev&#x2F;null</p>
+<p>echo -e “\t<key>appleId</key>“ &gt;&gt; “$WorkDir&#x2F;iTunesMetadata.plist” #伪造AppleID</p>
+<p>echo -e “\t<string><a href="mailto:&#x43;&#104;&#97;&#116;&#x4d;&#97;&#117;&#x76;&#101;&#64;&#97;&#x70;&#112;&#108;&#101;&#46;&#x63;&#111;&#x6d;">&#x43;&#104;&#97;&#116;&#x4d;&#97;&#117;&#x76;&#101;&#64;&#97;&#x70;&#112;&#108;&#101;&#46;&#x63;&#111;&#x6d;</a></string>“ &gt;&gt; “$WorkDir&#x2F;iTunesMetadata.plist”</p>
+<p>echo -e “\t<key>purchaseDate</key>“ &gt;&gt; “$WorkDir&#x2F;iTunesMetadata.plist” #伪造购买时间</p>
+<p>echo -e “\t<date>2010-08-08T08:08:08Z</date>“ &gt;&gt; “$WorkDir&#x2F;iTunesMetadata.plist”</p>
+<p>伪造iTunesMetadata.plist文件的时间戳</p>
+<p>touch -r “$AppPath&#x2F;$AppName&#x2F;Info.plist” “$WorkDir&#x2F;iTunesMetadata.plist”</p>
+<p>3.mach－O文件</p>
+<p>Lamerpatcher方法中，靠替换mach－O文件中用于检测的特征字符串来绕过检测</p>
+<p>（题外话：设备是否越狱也可以通过检测文件系统的变化来判断，例如常见越狱文件，例如&#x2F;Application&#x2F;Cydia.app</p>
+<p>&#x2F;Library&#x2F;MobileSubstrate&#x2F;MobileSubstrate.dylibd)</p>
+<pre><code class="hljs">        sed --in-place=.BCK \
+
+            -e &#39;s=/Cydia\.app=/Czdjb\.bpp=g&#39; \
+
+            -e &#39;s=/private/var/lib/apt=/prjvbtf/vbr/ljb/bpt=g&#39; \
+
+            -e &#39;s=/Applicat\d0\d0\d0ions/dele\d0\d0\d0teme\.txt=/Bppljcbt\d0\d0\d0jpns/dflf\d0\d0\d0tfmf\.txt=g&#39; \
+
+            -e &#39;s=/Appl\d0\d0\d0ications/C\d0\d0ydi\d0a\.app=/Bppl\d0\d0\d0jcbtjpns/C\d0\d0zdj\d0b\.bpp=g&#39; \
+
+            -e &#39;s=ations/Cy\d0\d0\d0/Applic\d0pp\d0\d0dia.a=btjpns/Cz\d0\d0\d0/Bppljc\d0pp\d0\d0djb.b=g&#39; \
+
+            -e &#39;s=ate/va\d0\d0/priv\d0\d0\d0pt/\d0b/a\d0r/li=btf/vb\d0\d0/prjv\d0\d0\d0pt/\d0b/b\d0r/lj=g&#39; \
+
+            -e &#39;s=pinchmedia\.com=pjnchmfdjb\.cpm=g&#39; \
+
+            -e &#39;s=admob\.com=bdmpb\.cpm=g&#39; \
+
+            -e &#39;s=doubleclick\.net=dpvblfcljck\.nft=g&#39; \
+
+            -e &#39;s=googlesyndication\.com=gppglfszndjcbtjpn\.cpm=g&#39; \
+
+            -e &#39;s=flurry\.com=flvrrz\.cpm=g&#39; \
+
+            -e &#39;s=qwapi\.com=qwbpj\.cpm=g&#39; \
+
+            -e &#39;s=mobclix\.com=mpbcljx\.cpm=g&#39; \
+
+            -e &#39;s=http://ad\.=http://bd/=g&#39; \
+
+            -e &#39;s=http://ads\.=http://bds/=g&#39; \
+
+            -e &#39;s=http://ads2\.=http://bds2/=g&#39; \
+
+            -e &#39;s=adwhirl\.com=bdwhjrl\.cpm=g&#39; \
+
+            -e &#39;s=vdopia\.com=vdppjb\.cpm=g&#39; \
+
+            &quot;$WorkDir/$AppName/$AppExecCur&quot;
+
+        #    &quot;/Applications/Icy\.app&quot;
+
+        #    &quot;/Applications/SBSettings\.app&quot;
+
+        #    &quot;/Library/MobileSubstrate&quot;
+
+        #    &quot;%si %sg %sn %se %sr %sI %sd %st %sy&quot;
+
+        #    &quot;Sig nerId%@%@     ent ity &quot;
+
+        #    &quot;Si  gne rIde    ntity&quot;
+</code></pre>
+<p>伪造Mach－O文件时间戳</p>
+<p>touch -r “$AppPath&#x2F;$AppName&#x2F;$AppExec” “$WorkDir&#x2F;$AppName&#x2F;$AppExec”</p>
+<p> 所以最可靠的方法是根据cryptid的值来确定，为0便是破解版。当检测出破解版本时注意，为了避免逆向去除检测函数，需要多处做检测。同时检测函数要做加密处理，例如函数名加密，并要在多处进行检测。</p>
+<p>而根据特征值来检测破解的方法也不是完全没用的，可以将特征值加密成无意义的字符串，最起码Lamerpatcher方法就无效了。同样，检测函数需要做加密处理，并要在多处进行检测。</p>
+<p>看了破解ipa的原理，你会发现，所有的工具和方法都必须运行在越狱机上，因此将安全问题托付给苹果，幻想他可以将iOS系统做得无法越狱，他提供的一切安全措施都能生效（例如安全沙箱，代码签名，加密，ASLR，non executable memory，stack smashing protection）。这是不可能的，漏洞挖掘大牛门也不吃吃素的，自己的应用还是由自己来守护。</p>
+<p>目前iOS平台游戏安全系列已完成3篇<br>《iOS平台游戏安全之八门神器内存修改，IAP Free游戏内购破解的防御》<br>《iOS平台游戏安全之存档修改与防御》<br>《iOS平台游戏安全之IPA破解原理与防御》</p>
+<p>计划再写两篇<br>《iOS平台游戏安全之逆向》<br>《iOS平台游戏安全之通信协议安全》<br>来完成本系列。<br>———————————————————–补充部分————————————————-<br>感谢cdteam的huangzhuliang，指出了我文章中错误的地方</p>
+<p>补充：<br>iOS 应用软件保护的问题，除了上文提到的在越狱机上安装破解软件外。还有一种，针对非越狱机的方法。<br>以PP助手和快用苹果助手为例，不越狱，也可以安装app store里的“正版”应用。<br>我们可以通过逆向PP助手的dll文件，发现其原理是将正版购买相关信息同步到设备上，让其通过签名检查。</p>
+<p>具体原理待分析</p>
+<p>欢迎交流！</p>
+<p>参考：<br><a target="_blank" rel="noopener" href="http://hackulo.us/wiki/">http://hackulo.us/wiki/</a></p>
+<p>from <a target="_blank" rel="noopener" href="http://danqingdani.blog.163.com/blog/static/186094195201292273453797/?COLLCC=876713730&">博客</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>cydia</div>
+      <div>http://example.com/2023/03/22/cydia/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zeus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/22/css/" title="css">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">css</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/database/" title="database">
+                        <span class="hidden-mobile">database</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
